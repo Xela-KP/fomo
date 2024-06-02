@@ -1,16 +1,16 @@
 {
-    "name": "marites",
-    "version": "0.1.0",
-    "description": "Marites Social Media App",
-    "license": "ISC",
-    "author": "",
-    "module": "module",
-    "scripts": {
-        "prettier": "prettier . --write",
-        "sort": "sort-package-json \"package.json\" \"src/client/package.json\" \"src/server/package.json\""
-    },
-    "devDependencies": {
-        "prettier": "3.3.0",
-        "sort-package-json": "^2.10.0"
-    }
+  "name": "marites",
+  "version": "0.1.0",
+  "description": "Marites Social Media App",
+  "license": "ISC",
+  "author": "Alexander Perocho <perocho.xela@gmail.com>",
+  "type": "module",
+  "scripts": {
+    "prettier": "prettier . --write",
+    "sort": "sort-package-json \"package.json\" \"src/client/package.json\" \"src/server/package.json\""
+  },
+  "devDependencies": {
+    "prettier": "3.3.0",
+    "sort-package-json": "^2.10.0"
+  }
 }
