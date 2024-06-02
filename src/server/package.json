@@ -8,7 +8,7 @@
     "type": "module",
     "main": "index.js",
     "scripts": {
-        "start": "node --env-file=.env --watch src/index.mjs"
+        "start": "node --env-file=.env --trace-warnings --watch src/index.mjs"
     },
     "dependencies": {
         "body-parser": "^1.20.2",
