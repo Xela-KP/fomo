@@ -1,0 +1,11 @@
+{
+  "name": "marites",
+  "version": "0.1.0",
+  "description": "Marites Social Media App",
+  "module": "module",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "3.3.0"
+  }
+}
