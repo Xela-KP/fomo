@@ -6,8 +6,9 @@
     "license": "ISC",
     "author": "Alexander Perocho <perocho.xela@gmail.com>",
     "main": "index.js",
+    "type": "module",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "node --watch src/index.mjs"
     },
     "dependencies": {
         "body-parser": "^1.20.2",
