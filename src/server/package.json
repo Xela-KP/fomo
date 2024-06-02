@@ -5,8 +5,8 @@
     "keywords": [],
     "license": "ISC",
     "author": "Alexander Perocho <perocho.xela@gmail.com>",
-    "main": "index.js",
     "type": "module",
+    "main": "index.js",
     "scripts": {
         "start": "node --watch src/index.mjs"
     },
