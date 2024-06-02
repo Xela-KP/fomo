@@ -1,18 +1,13 @@
-import bodyParser from 'body-parser';
 import express from 'express';
-import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import { MongoClient, ServerApiVersion } from 'mongodb';
-import cors from 'cors';
-import postsRoute from '../routes/posts.mjs';
 
+dotenv.config();
 const app = express();
-app.use('/posts', postsRoute);
-app.use(bodyParser.json({ limit: '30mb', extended: true }));
-app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
-app.use(cors());
 
 const PORT = process.env.PORT;
-const URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PWD}@maritescluster.f0kk2lm.mongodb.net/?retryWrites=true&w=majority&appName=MaritesCluster`;
+const URI = process.env.MONGO;
+console.log(URI);
 const CLIENT = new MongoClient(URI, {
     serverApi: {
         version: ServerApiVersion.v1,
@@ -21,7 +16,7 @@ const CLIENT = new MongoClient(URI, {
     },
 });
 
-async function run() {
+const run = async () => {
     try {
         await CLIENT.connect();
         app.listen(process.env.PORT);
@@ -34,6 +29,6 @@ async function run() {
     } finally {
         await CLIENT.close();
     }
-}
+};
 
 run().catch(console.dir);
