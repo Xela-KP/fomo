@@ -3,8 +3,10 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { MongoClient, ServerApiVersion } from 'mongodb';
 import cors from 'cors';
+import postsRoute from '../routes/posts.mjs';
 
 const app = express();
+app.use('/posts', postsRoute);
 app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());
@@ -22,10 +24,13 @@ const CLIENT = new MongoClient(URI, {
 async function run() {
     try {
         await CLIENT.connect();
+        app.listen(process.env.PORT);
         await CLIENT.db('admin').command({ ping: 1 });
         console.log(
             'Pinged your deployment. You successfully connected to MongoDB!'
         );
+    } catch (error) {
+        console.error(error);
     } finally {
         await CLIENT.close();
     }
