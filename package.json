@@ -7,9 +7,16 @@
     "type": "module",
     "scripts": {
         "prettier": "prettier . --write",
-        "sort": "sort-package-json \"package.json\" \"src/client/package.json\" \"src/server/package.json\""
+        "sort": "sort-package-json \"package.json\" \"src/client/package.json\" \"src/server/package.json\"",
+        "prepare": "husky"
+    },
+    "lint-staged": {
+        "package.json": "sort",
+        "*.{js,ts,mjs,jsx,tsx}": "prettier"
     },
     "devDependencies": {
+        "husky": "^9.0.11",
+        "lint-staged": "^15.2.5",
         "prettier": "3.3.0",
         "sort-package-json": "^2.10.0"
     }
