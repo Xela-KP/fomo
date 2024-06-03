@@ -1,3 +1,3 @@
 export const root = (req, res) => {
-    res.json({ message: 'posts' });
+    return res.json({ message: 'posts' });
 };

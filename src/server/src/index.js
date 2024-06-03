@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 import e from 'express';
 import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
+import { errorHandler } from './controllers/error.controller.js';
+
 dotenv.config();
 
 (async () => {
@@ -20,3 +22,4 @@ app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
 app.use(e.json());
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use(errorHandler);
