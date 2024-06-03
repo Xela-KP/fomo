@@ -1,6 +1,6 @@
 import User from '../models/user.model.js';
 
-export const signup = (req, res) => {
+export const signup = async (req, res) => {
     try {
         const { username, password, email } = req.body;
         if (
@@ -13,13 +13,13 @@ export const signup = (req, res) => {
         )
             return res.status(400).json({ msg: 'All Fields are Required' });
         const user = new User({ username, password, email });
-        user.save();
+        await user.save();
         res.status(201).send({
             message: 'Successfully Created User',
             user: user,
         });
     } catch (err) {
-        console.error(err);
+        res.status(500).send({ message: err.message });
     }
 };
 export const login = (req, res) => {};
