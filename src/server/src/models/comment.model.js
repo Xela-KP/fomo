@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-export default new mongoose.Schema(
+const schema = new mongoose.Schema(
     {
         content: {
             type: String,
@@ -25,3 +25,7 @@ export default new mongoose.Schema(
     },
     { timestamps: true }
 );
+
+const model = mongoose.model('Post', schema);
+
+export default model;
