@@ -32,10 +32,9 @@ export const login = async (req, res, next) => {
         const invalidCredentialError = createError(404, 'Invalid Credential');
         const user = await User.findOne({ email });
         if (!user) return next(invalidCredentialError);
-        const validPassword = await bcrypt.compare(password, user.password);
+        const validPassword = bcrypt.compareSync(password, user.password);
         if (!validPassword) return next(invalidCredentialError);
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-
         const { password: pwd, ...rest } = user._doc;
         res.status(200)
             .cookie('access_token', token, { httpOnly: true })
