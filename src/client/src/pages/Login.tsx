@@ -8,16 +8,20 @@ import {
     useState,
 } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginStart, loginSuccess, loginFail } from '../redux/user/userSlice';
+import type { RootState } from '../redux/store';
 
 export default () => {
     const [showPwd, setShowPwd] = useState(false);
     const [pwdPrompt, setPwdPrompt] = useState('show');
     const [pwdType, setPwdType] = useState('password');
     const [formData, setFormData] = useState({});
-    const [alert, setAlert] = useState(String);
-    const [loading, setLoading] = useState(false);
+    const { loading, error: alert } = useSelector(
+        (state: RootState) => state.user
+    );
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-
     const togglePwdPrompt: MouseEventHandler = () => {
         setShowPwd(!showPwd);
         if (showPwd) {
@@ -31,9 +35,8 @@ export default () => {
 
     const handleSubmit: FormEventHandler = async (e: FormEvent) => {
         e.preventDefault();
-        setAlert('');
         try {
-            setLoading(true);
+            dispatch(loginStart());
             const req: RequestInit = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -41,13 +44,15 @@ export default () => {
             };
             const res = await fetch('/api/auth/login', req);
             const data = await res.json();
-            setLoading(false);
-            if (data.success === false) return setAlert('Invalid Credentials');
-            return navigate('/');
+            if (data.success === false) {
+                dispatch(loginFail(data.message));
+            }
+            if (res.ok) {
+                dispatch(loginSuccess(data));
+                navigate('/');
+            }
         } catch (error) {
-            console.error(error);
-            setLoading(false);
-            return setAlert('Failed to login');
+            dispatch(loginFail(error));
         }
     };
 
@@ -105,9 +110,9 @@ export default () => {
                         </Label>
                     </Link>
                 </div>
-                {alert && (
+                {(alert as string) && (
                     <Alert color="failure" className="mt-5">
-                        {alert}
+                        {alert as string}
                     </Alert>
                 )}
             </div>
