@@ -1,14 +1,16 @@
-import { Navbar, Dropdown, Avatar, TextInput, Button } from 'flowbite-react';
+import { Navbar, Dropdown, Avatar, TextInput } from 'flowbite-react';
 import { FormEventHandler, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
 const Brand = () => (
-    <Navbar.Brand href="/">
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-            Marites
-        </span>
-    </Navbar.Brand>
+    <Link to="/">
+        <Navbar.Brand>
+            <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+                Marités
+            </span>
+        </Navbar.Brand>
+    </Link>
 );
 
 const SearchBar = () => {
