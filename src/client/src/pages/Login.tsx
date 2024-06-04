@@ -9,11 +9,6 @@ import {
 } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-interface LoginForm {
-    email: string;
-    password: string;
-}
-
 export default () => {
     const [showPwd, setShowPwd] = useState(false);
     const [pwdPrompt, setPwdPrompt] = useState('show');
@@ -92,6 +87,7 @@ export default () => {
                         </div>
                         <TextInput
                             id="password"
+                            placeholder="********"
                             type={pwdType}
                             required
                             onChange={handleInput}

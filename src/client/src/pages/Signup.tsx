@@ -95,7 +95,7 @@ export default () => {
                         <TextInput
                             id="password"
                             type={pwdType}
-                            placeholder="Password"
+                            placeholder="********"
                             required
                             onChange={handleInput}
                         />
