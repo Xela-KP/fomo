@@ -19,7 +19,7 @@ export default () => {
     };
 
     return (
-        <div className="flex w-screen h-screen justify-center">
+        <div className="flex w-full h-full justify-center">
             <div className="m-4 max-w-lg w-full justify-center">
                 <span className="my-10 flex justify-center">
                     <Label className="text-xl">Create an account</Label>
