@@ -1,15 +1,8 @@
-import { Navbar, Dropdown, Avatar, TextInput } from 'flowbite-react';
+import { Navbar, Dropdown, Avatar, TextInput, Button } from 'flowbite-react';
 import { FormEventHandler, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-
-const Brand = () => (
-    <Link to="/">
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-            Marités
-        </span>
-    </Link>
-);
+import Brand from './Brand';
 
 const SearchBar = () => {
     const handleSubmit: FormEventHandler = (e) => {
@@ -20,9 +13,8 @@ const SearchBar = () => {
         <form onSubmit={handleSubmit}>
             <TextInput
                 type="text"
-                placeholder="Search..."
+                placeholder="Search Marités..."
                 rightIcon={AiOutlineSearch}
-                className=""
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
             />
@@ -82,8 +74,15 @@ const ProfileDropdown = (
 export default () => {
     return (
         <Navbar fluid rounded>
-            <Brand />
-            <SearchBar />
+            <span className="flex gap-10 items-center">
+                <Brand />
+                <SearchBar />
+            </span>
+            {/* <span className="flex">
+                <Button />
+                <Button />
+                <Button />
+            </span> */}
             <ProfileDropdown profileUrl={''} />
             {/* <NavElements /> */}
         </Navbar>
