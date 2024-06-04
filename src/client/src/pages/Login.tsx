@@ -52,7 +52,7 @@ export default () => {
                     </Button>
                 </form>
                 <div className="mt-2 space-x-2">
-                    <Label>Already have an account?</Label>
+                    <Label>Don't have an account?</Label>
                     <Link to="../signup">
                         <Label className="cursor-pointer text-blue-600">
                             Sign Up
