@@ -1,5 +1,10 @@
 import { Label, Button, TextInput } from 'flowbite-react';
-import { MouseEventHandler, useState } from 'react';
+import {
+    ChangeEvent,
+    ChangeEventHandler,
+    MouseEventHandler,
+    useState,
+} from 'react';
 import { Link } from 'react-router-dom';
 
 export default () => {
@@ -18,6 +23,10 @@ export default () => {
         }
     };
 
+    const handleInput: ChangeEventHandler = (e: ChangeEvent) => {
+        console.log(e.target);
+    };
+
     return (
         <div className="flex w-full h-full justify-center">
             <div className="m-4 max-w-lg w-full justify-center">
@@ -31,6 +40,7 @@ export default () => {
                             type="text"
                             placeholder="Username"
                             id="username"
+                            onChange={handleInput}
                         />
                     </div>
                     <div>
@@ -42,6 +52,7 @@ export default () => {
                             type="email"
                             placeholder="example@domain.com"
                             required
+                            onChange={handleInput}
                         />
                     </div>
                     <div>
@@ -53,7 +64,12 @@ export default () => {
                                 className="p-1 cursor-pointer select-none"
                             />
                         </div>
-                        <TextInput id="password" type={pwdType} required />
+                        <TextInput
+                            id="password"
+                            type={pwdType}
+                            required
+                            onChange={handleInput}
+                        />
                     </div>
                     <Button type="submit" gradientDuoTone="greenToBlue">
                         Sign Up

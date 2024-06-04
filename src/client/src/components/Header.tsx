@@ -5,11 +5,9 @@ import { Link } from 'react-router-dom';
 
 const Brand = () => (
     <Link to="/">
-        <Navbar.Brand>
-            <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-                Marités
-            </span>
-        </Navbar.Brand>
+        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+            Marités
+        </span>
     </Link>
 );
 
@@ -74,7 +72,7 @@ const ProfileDropdown = (
                     <Dropdown.Item>Login</Dropdown.Item>
                 </Link>
                 <Link to="signup">
-                    <Dropdown.Item href="/login">Sign Up</Dropdown.Item>
+                    <Dropdown.Item>Sign Up</Dropdown.Item>
                 </Link>
             </Dropdown>
         </div>
