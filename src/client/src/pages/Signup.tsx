@@ -8,6 +8,7 @@ import {
     useState,
 } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import OAuthButton from '../components/OAuthButton';
 
 export default () => {
     const [showPwd, setShowPwd] = useState(false);
@@ -111,6 +112,11 @@ export default () => {
                             <span>Sign Up</span>
                         )}
                     </Button>
+                    <span className="flex justify-center">
+                        <Label className="justify-self-center">Or</Label>
+                    </span>
+
+                    <OAuthButton />
                 </form>
                 <div className="mt-2 space-x-2">
                     <Label>Already have an account?</Label>

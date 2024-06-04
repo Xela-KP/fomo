@@ -11,6 +11,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginStart, loginSuccess, loginFail } from '../redux/user/userSlice';
 import type { RootState } from '../redux/store';
+import OAuthButton from '../components/OAuthButton';
 
 export default () => {
     const [showPwd, setShowPwd] = useState(false);
@@ -101,6 +102,7 @@ export default () => {
                     <Button type="submit" gradientDuoTone="greenToBlue">
                         {loading ? <Spinner></Spinner> : <span>Log In</span>}
                     </Button>
+                    <OAuthButton />
                 </form>
                 <div className="mt-2 space-x-2">
                     <Label>Don't have an account?</Label>
