@@ -4,7 +4,7 @@ import { createError } from '../utils/error.util.js';
 import jwt from 'jsonwebtoken';
 
 export const signup = async (req, res, next) => {
-    const { username, password, email } = req.body;
+    const { username, email, password } = req.body;
     if (
         !username ||
         !password ||
@@ -25,18 +25,18 @@ export const signup = async (req, res, next) => {
 };
 
 export const login = async (req, res, next) => {
-    const { username, password } = req.body;
-    if (!username || !password || username === '' || password === '')
+    const { email, password } = req.body;
+    if (!email || !password || email === '' || password === '')
         return next(createError(400, 'All fields are required.'));
     try {
         const invalidCredentialError = createError(404, 'Invalid Credential');
-        const user = await User.findOne({ username });
+        const user = await User.findOne({ email });
         if (!user) return next(invalidCredentialError);
-        const validPassword = bcrypt.compareSync(password, user.password);
+        const validPassword = await bcrypt.compare(password, user.password);
         if (!validPassword) return next(invalidCredentialError);
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
         res.status(200)
-            .cookie('access token', token, { httpOnly: true })
+            .cookie('access_token', token, { httpOnly: true })
             .json({ message: 'Login Successful' });
     } catch (error) {
         return next(error);
