@@ -7,9 +7,9 @@ export default () => (
     <BrowserRouter>
         <Header />
         <Routes>
-            <Route path="./pages/login" element={<Home />}></Route>
-            <Route path="./pages/login" element={<Signup />}></Route>
-            <Route path="./pages/login" element={<Login />}></Route>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="signup" element={<Signup />}></Route>
+            <Route path="login" element={<Login />}></Route>
         </Routes>
     </BrowserRouter>
 );
