@@ -35,9 +35,11 @@ export const login = async (req, res, next) => {
         const validPassword = await bcrypt.compare(password, user.password);
         if (!validPassword) return next(invalidCredentialError);
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+
+        const { password: pwd, ...rest } = user._doc;
         res.status(200)
             .cookie('access_token', token, { httpOnly: true })
-            .json({ message: 'Login Successful' });
+            .json({ message: 'Login Successful', user: rest });
     } catch (error) {
         return next(error);
     }
