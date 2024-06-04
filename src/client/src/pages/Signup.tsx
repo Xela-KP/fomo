@@ -36,20 +36,6 @@ export default () => {
 
     const handleSubmit: FormEventHandler = async (e: FormEvent) => {
         e.preventDefault();
-        const { username, email, password } = formData as {
-            username: string;
-            email: string;
-            password: string;
-        };
-        if (
-            !username ||
-            !email ||
-            !password ||
-            username === '' ||
-            email === '' ||
-            password === ''
-        )
-            return setErrorMessage('All fields are required');
         setErrorMessage('');
         try {
             setLoading(true);
@@ -81,6 +67,7 @@ export default () => {
                             id="username"
                             type="text"
                             placeholder="Username"
+                            required
                             onChange={handleInput}
                         />
                     </div>
