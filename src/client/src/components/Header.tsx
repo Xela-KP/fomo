@@ -27,7 +27,6 @@ const SearchBar = () => {
 
 const ProfileDropdown = () => {
     const { currentUser } = useSelector((state: RootState) => state.user);
-
     const { username, profilePicture } = currentUser
         ? (currentUser as User)
         : {
@@ -57,10 +56,12 @@ const ProfileDropdown = () => {
                 )}
                 {currentUser && (
                     <>
-                        <Link to="profile">
+                        <Link to="dashboard/?tab=profile">
                             <Dropdown.Item>Profile</Dropdown.Item>
                         </Link>
-                        <Dropdown.Item>Settings</Dropdown.Item>
+                        <Link to="dashboard/?tab=settings">
+                            <Dropdown.Item>Settings</Dropdown.Item>
+                        </Link>
                         <Dropdown.Divider />
                     </>
                 )}
@@ -87,13 +88,7 @@ export default () => {
                 <Brand />
                 <SearchBar />
             </span>
-            {/* <span className="flex">
-                <Button />
-                <Button />
-                <Button />
-            </span> */}
             <ProfileDropdown />
-            {/* <NavElements /> */}
         </Navbar>
     );
 };
