@@ -3,13 +3,13 @@ import type { User } from '../../types/user';
 
 export interface UsersState {
     currentUser: object | null;
-    error: string | unknown;
+    errorMessage: string | null;
     loading: boolean;
 }
 
 const initialState: UsersState = {
     currentUser: null,
-    error: null,
+    errorMessage: null,
     loading: false,
 };
 
@@ -19,16 +19,16 @@ const userSlice = createSlice({
     reducers: {
         loginStart: (state) => {
             state.loading = true;
-            state.error = null;
+            state.errorMessage = null;
         },
         loginSuccess: (state, action: PayloadAction<User>) => {
             state.currentUser = action.payload;
             state.loading = false;
-            state.error = null;
+            state.errorMessage = null;
         },
-        loginFail: (state, action: PayloadAction<unknown>) => {
+        loginFail: (state, action: PayloadAction<string>) => {
             state.loading = false;
-            state.error = action.payload;
+            state.errorMessage = action.payload;
         },
     },
 });

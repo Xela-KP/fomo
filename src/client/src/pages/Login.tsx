@@ -18,7 +18,7 @@ export default () => {
     const [pwdPrompt, setPwdPrompt] = useState('show');
     const [pwdType, setPwdType] = useState('password');
     const [formData, setFormData] = useState({});
-    const { loading, error: alert } = useSelector(
+    const { loading, errorMessage } = useSelector(
         (state: RootState) => state.user
     );
     const dispatch = useDispatch();
@@ -52,8 +52,8 @@ export default () => {
                 dispatch(loginSuccess(data));
                 navigate('/');
             }
-        } catch (error) {
-            dispatch(loginFail(error));
+        } catch (err) {
+            dispatch(loginFail(err as string));
         }
     };
 
@@ -112,9 +112,9 @@ export default () => {
                         </Label>
                     </Link>
                 </div>
-                {(alert as string) && (
+                {errorMessage && (
                     <Alert color="failure" className="mt-5">
-                        {alert as string}
+                        {errorMessage}
                     </Alert>
                 )}
             </div>

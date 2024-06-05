@@ -112,10 +112,6 @@ export default () => {
                             <span>Sign Up</span>
                         )}
                     </Button>
-                    <span className="flex justify-center">
-                        <Label className="justify-self-center">Or</Label>
-                    </span>
-
                     <OAuthButton />
                 </form>
                 <div className="mt-2 space-x-2">
