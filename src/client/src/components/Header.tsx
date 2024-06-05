@@ -25,20 +25,6 @@ const SearchBar = () => {
     );
 };
 
-// const NavElements = () => (
-//     <>
-//         <Navbar.Toggle />
-//         <Navbar.Collapse>
-//             <Navbar.Link>
-//                 <Link to="/friends">Friends</Link>
-//             </Navbar.Link>
-//             <Navbar.Link>
-//                 <Link to="/events">Events</Link>
-//             </Navbar.Link>
-//         </Navbar.Collapse>
-//     </>
-// );
-
 const ProfileDropdown = () => {
     const { currentUser } = useSelector((state: RootState) => state.user);
 
