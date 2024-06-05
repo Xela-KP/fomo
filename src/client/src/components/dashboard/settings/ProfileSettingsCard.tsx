@@ -1,4 +1,4 @@
-import { Card, Avatar } from 'flowbite-react';
+import { Card, Avatar, TextInput } from 'flowbite-react';
 
 export default () => (
     <Card className="">
@@ -23,16 +23,8 @@ export default () => (
                     @jeseleos
                 </a>
             </p>
-            <p className="mb-4 text-sm">
-                Open-source contributor. Building{' '}
-                <a
-                    href="#"
-                    className="text-blue-600 hover:underline dark:text-blue-500"
-                >
-                    flowbite.com
-                </a>
-                .
-            </p>
+            <TextInput placeholder="Description"></TextInput>
+            <p className="mb-4 text-sm"></p>
             <ul className="flex text-sm">
                 <li className="me-2">
                     <a href="#" className="hover:underline">

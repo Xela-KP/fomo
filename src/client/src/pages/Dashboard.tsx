@@ -28,7 +28,7 @@ export default () => {
         setTab(tabFromUrl as string);
     }, [location.search]);
     return (
-        <div className="grid grid-cols-2 min-h-screen">
+        <div className="flex flex-row min-h-screen">
             <Sidebar tab={tab} />
             {getComponent(tab)}
         </div>

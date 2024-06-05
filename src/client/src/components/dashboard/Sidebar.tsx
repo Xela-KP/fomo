@@ -1,4 +1,4 @@
-import { Sidebar } from 'flowbite-react';
+import { Card, Sidebar } from 'flowbite-react';
 import {
     HiCog,
     HiUserCircle,
