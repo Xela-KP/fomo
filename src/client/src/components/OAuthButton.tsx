@@ -26,7 +26,6 @@ export default () => {
                 body: JSON.stringify(user),
             };
             const res = await fetch('/api/auth/google', req);
-            console.log(res);
             const data = await res.json();
 
             if (data.success === false) {

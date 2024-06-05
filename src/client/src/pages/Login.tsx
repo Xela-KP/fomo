@@ -18,10 +18,9 @@ export default () => {
     const [pwdPrompt, setPwdPrompt] = useState('show');
     const [pwdType, setPwdType] = useState('password');
     const [formData, setFormData] = useState({});
-    const { loading, errorMessage } = useSelector(
+    const { loading, errorMessage, currentUser } = useSelector(
         (state: RootState) => state.user
     );
-    console.log(loading, errorMessage);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const togglePwdPrompt: MouseEventHandler = () => {
@@ -62,7 +61,6 @@ export default () => {
         const target: HTMLInputElement = e.target as HTMLInputElement;
         setFormData({ ...formData, [target.id]: target.value.trim() });
     };
-    console.log(formData);
 
     return (
         <div className="flex w-full h-full justify-center">
