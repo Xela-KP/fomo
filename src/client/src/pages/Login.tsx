@@ -21,6 +21,7 @@ export default () => {
     const { loading, errorMessage } = useSelector(
         (state: RootState) => state.user
     );
+    console.log(loading, errorMessage);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const togglePwdPrompt: MouseEventHandler = () => {
@@ -114,7 +115,7 @@ export default () => {
                 </div>
                 {errorMessage && (
                     <Alert color="failure" className="mt-5">
-                        {errorMessage}
+                        <span>{errorMessage}</span>
                     </Alert>
                 )}
             </div>

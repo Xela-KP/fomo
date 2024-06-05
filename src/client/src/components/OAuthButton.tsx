@@ -37,7 +37,7 @@ export default () => {
                 navigate('/');
             }
         } catch (error) {
-            dispatch(loginFail(error as string));
+            console.error(error);
         }
     };
     return (
