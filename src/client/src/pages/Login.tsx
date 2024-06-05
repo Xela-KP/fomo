@@ -18,7 +18,7 @@ export default () => {
     const [pwdPrompt, setPwdPrompt] = useState('show');
     const [pwdType, setPwdType] = useState('password');
     const [formData, setFormData] = useState({});
-    const { loading, errorMessage, currentUser } = useSelector(
+    const { loading, errorMessage } = useSelector(
         (state: RootState) => state.user
     );
     const dispatch = useDispatch();

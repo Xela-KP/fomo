@@ -3,6 +3,9 @@ import { FormEventHandler, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import Brand from './Brand';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { User } from '../types/user';
 
 const SearchBar = () => {
     const handleSubmit: FormEventHandler = (e) => {
@@ -36,36 +39,56 @@ const SearchBar = () => {
 //     </>
 // );
 
-const ProfileDropdown = (
-    { profileUrl } = {
-        profileUrl:
-            'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
-    }
-) => {
+const ProfileDropdown = () => {
+    const { currentUser } = useSelector((state: RootState) => state.user);
+
+    const { username, profilePicture } = currentUser
+        ? (currentUser as User)
+        : {
+              username: '',
+              profilePicture:
+                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+          };
     return (
         <div className="md:order-2">
             <Dropdown
                 arrowIcon={false}
                 inline
-                label={<Avatar alt="User settings" img={profileUrl} rounded />}
+                label={
+                    <Avatar
+                        alt="User settings"
+                        img={profilePicture as string}
+                        rounded
+                    />
+                }
             >
-                <Dropdown.Header>
-                    <span className="block text-sm">Bonnie Green</span>
-                    <span className="block truncate text-sm font-medium">
-                        example@email.com
-                    </span>
-                </Dropdown.Header>
-                <Link to="profile">
-                    <Dropdown.Item>Profile</Dropdown.Item>
-                </Link>
-
-                <Dropdown.Divider />
-                <Link to="login">
-                    <Dropdown.Item>Login</Dropdown.Item>
-                </Link>
-                <Link to="signup">
-                    <Dropdown.Item>Sign Up</Dropdown.Item>
-                </Link>
+                {currentUser && (
+                    <Dropdown.Header>
+                        <span className="block truncate text-sm font-medium">
+                            {username}
+                        </span>
+                    </Dropdown.Header>
+                )}
+                {currentUser && (
+                    <>
+                        <Link to="profile">
+                            <Dropdown.Item>Profile</Dropdown.Item>
+                        </Link>
+                        <Dropdown.Item>Settings</Dropdown.Item>
+                        <Dropdown.Divider />
+                    </>
+                )}
+                {!currentUser && (
+                    <>
+                        <Link to="login">
+                            <Dropdown.Item>Log In</Dropdown.Item>
+                        </Link>
+                        <Link to="signup">
+                            <Dropdown.Item>Sign Up</Dropdown.Item>
+                        </Link>
+                    </>
+                )}
+                {currentUser && <Dropdown.Item>Log Out</Dropdown.Item>}
             </Dropdown>
         </div>
     );
@@ -83,7 +106,7 @@ export default () => {
                 <Button />
                 <Button />
             </span> */}
-            <ProfileDropdown profileUrl={''} />
+            <ProfileDropdown />
             {/* <NavElements /> */}
         </Navbar>
     );
