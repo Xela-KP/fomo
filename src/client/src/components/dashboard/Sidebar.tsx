@@ -1,4 +1,4 @@
-import { Card, Sidebar } from 'flowbite-react';
+import { Sidebar } from 'flowbite-react';
 import {
     HiCog,
     HiUserCircle,
@@ -15,6 +15,7 @@ export default ({ tab }: { tab: string }) => {
                 <Sidebar.ItemGroup>
                     <Link to="?tab=profile">
                         <Sidebar.Item
+                            as="div"
                             active={tab === 'profile'}
                             icon={HiUserCircle}
                         >
@@ -22,12 +23,17 @@ export default ({ tab }: { tab: string }) => {
                         </Sidebar.Item>
                     </Link>
                     <Link to="?tab=friends">
-                        <Sidebar.Item active={tab === 'friends'} icon={HiUser}>
+                        <Sidebar.Item
+                            as="div"
+                            active={tab === 'friends'}
+                            icon={HiUser}
+                        >
                             Friends
                         </Sidebar.Item>
                     </Link>
                     <Link to="?tab=inbox">
                         <Sidebar.Item
+                            as="div"
                             active={tab === 'inbox'}
                             icon={HiInbox}
                             label="3"
@@ -38,12 +44,16 @@ export default ({ tab }: { tab: string }) => {
                 </Sidebar.ItemGroup>
                 <Sidebar.ItemGroup>
                     <Link to="?tab=settings">
-                        <Sidebar.Item active={tab === 'settings'} icon={HiCog}>
+                        <Sidebar.Item
+                            as="div"
+                            active={tab === 'settings'}
+                            icon={HiCog}
+                        >
                             Settings
                         </Sidebar.Item>
                     </Link>
                     <Link to="../logout">
-                        <Sidebar.Item icon={HiArrowSmRight}>
+                        <Sidebar.Item as="div" icon={HiArrowSmRight}>
                             Log Out
                         </Sidebar.Item>
                     </Link>

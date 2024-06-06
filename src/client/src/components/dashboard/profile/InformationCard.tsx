@@ -1,4 +1,4 @@
-import { Card, Label, Textarea } from 'flowbite-react';
+import { Card, Label } from 'flowbite-react';
 
 export default () => {
     return (

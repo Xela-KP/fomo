@@ -1,4 +1,4 @@
-import { Card, Avatar, TextInput } from 'flowbite-react';
+import { Card, TextInput } from 'flowbite-react';
 
 export default () => (
     <Card className="">

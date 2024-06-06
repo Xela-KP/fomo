@@ -1,4 +1,4 @@
-import { Card, Avatar } from 'flowbite-react';
+import { Card } from 'flowbite-react';
 
 export default () => (
     <Card className="">
