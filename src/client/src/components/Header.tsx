@@ -16,7 +16,7 @@ const SearchBar = () => {
         <form onSubmit={handleSubmit}>
             <TextInput
                 type="text"
-                placeholder="Search Marités..."
+                placeholder="Search Fomo..."
                 rightIcon={AiOutlineSearch}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
