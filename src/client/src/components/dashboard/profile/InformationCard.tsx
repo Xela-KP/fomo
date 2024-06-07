@@ -16,31 +16,9 @@ export default () => {
                     one-fourteenth soldier commoners forged.
                 </p>
             </div>
-            <div className="grid grid-cols-2 gap-y-10">
-                <div className="flex flex-col">
-                    <Label className="text-gray-600">Education</Label>
-                    <Label className="text-md">Western University</Label>
-                </div>
-                <div className="flex flex-col">
-                    <Label className="text-gray-600">Work History</Label>
-                    <Label className="text-md">None</Label>
-                </div>
-                <div className="flex flex-col">
-                    <Label className="text-gray-600">Role</Label>
-                    <Label className="text-md">Full Stack Developer</Label>
-                </div>
-                <div className="flex flex-col">
-                    <Label className="text-gray-600">Languages</Label>
-                    <Label className="text-md">English, Cebuano</Label>
-                </div>
-                <div className="flex flex-col">
-                    <Label className="text-gray-600">Department</Label>
-                    <Label className="text-md">Software Development</Label>
-                </div>
-                <div className="flex flex-col">
-                    <Label className="text-gray-600">Join Date</Label>
-                    <Label className="text-md">06-05-2024</Label>
-                </div>
+            <div className="flex flex-col">
+                <Label className="text-gray-600">Join Date</Label>
+                <Label className="text-md">06-05-2024</Label>
             </div>
         </Card>
     );

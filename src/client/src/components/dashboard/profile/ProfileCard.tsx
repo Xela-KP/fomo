@@ -18,7 +18,7 @@ export default () => {
                         />
                     </a>
                 </div>
-                <p className="text-base font-semibold leading-none text-gray-900 dark:text-white">
+                <p className="text-base font-semibold leading-none text-gray-900 dark:text-white mb-2">
                     <a href="#" className="hover:underline">
                         @{username as string}
                     </a>
