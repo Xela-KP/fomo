@@ -15,7 +15,7 @@ router.get('/user', user);
 router.get('/test', test);
 
 router.put('/user/:id/bio', putBio);
-router.put('/user/', putAbout);
-router.patch('/user/', patchLinks);
+router.put('/user/:id/about', putAbout);
+router.patch('/user/:id/links', patchLinks);
 
 export default router;

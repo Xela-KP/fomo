@@ -20,6 +20,15 @@ export const putBio = async (req, res) => {
     }
 };
 
-export const putAbout = (req, res) => {};
+export const putAbout = async (req, res) => {
+    try {
+        const { id: userId } = req.params;
+        const { about: newAbout } = req.body;
+        await User.findByIdAndUpdate(userId, { about: newAbout });
+        res.status(200).send({ message: 'about updated successfully' });
+    } catch (error) {
+        createError(400, error.message);
+    }
+};
 
 export const patchLinks = (req, res) => {};

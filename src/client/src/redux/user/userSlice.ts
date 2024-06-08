@@ -33,9 +33,12 @@ const userSlice = createSlice({
         updateBio: (state, action: PayloadAction<string>) => {
             if (state.currentUser) state.currentUser.bio = action.payload;
         },
+        updateAbout: (state, action: PayloadAction<string>) => {
+            if (state.currentUser) state.currentUser.about = action.payload;
+        },
     },
 });
 
-export const { loginStart, loginSuccess, loginFail, updateBio } =
+export const { loginStart, loginSuccess, loginFail, updateBio, updateAbout } =
     userSlice.actions;
 export default userSlice.reducer;

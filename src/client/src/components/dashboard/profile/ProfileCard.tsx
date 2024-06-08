@@ -5,7 +5,7 @@ import { User } from '../../../types/user';
 
 export default () => {
     const { currentUser } = useSelector((state: RootState) => state.user);
-    const { username, profilePicture } = currentUser as User;
+    const { bio, username, profilePicture } = currentUser as User;
     return (
         <Card className="">
             <div className="w-64 p-3">
@@ -23,16 +23,7 @@ export default () => {
                         @{username as string}
                     </a>
                 </p>
-                <p className="mb-4 text-sm">
-                    Open-source contributor. Building{' '}
-                    <a
-                        href="#"
-                        className="text-blue-600 hover:underline dark:text-blue-500"
-                    >
-                        flowbite.com
-                    </a>
-                    .
-                </p>
+                <p className="mb-4 text-sm">{bio}</p>
                 <ul className="flex text-sm">
                     <li className="me-2">
                         <a href="#" className="hover:underline">
