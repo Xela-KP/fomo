@@ -1,16 +1,18 @@
 import { Button, Card, Label, Textarea } from 'flowbite-react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
+import { User } from '../../../types/user';
 
 export default () => {
-    useSelector((state: RootState) => state.user);
+    const { currentUser } = useSelector((state: RootState) => state.user);
+    const { about } = currentUser as User;
     const saveAbout = () => {};
     return (
         <Card>
             <Label className="text-2xl">General Information</Label>
             <div>
                 <Label className="text-md">About me</Label>
-                <Textarea rows={5}>Example</Textarea>
+                <Textarea rows={5}>{about}</Textarea>
             </div>
             <Button
                 outline

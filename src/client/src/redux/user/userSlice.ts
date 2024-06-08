@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import type { User } from '../../types/user';
 
 export interface UsersState {
-    currentUser: object | null;
+    currentUser: User | null;
     errorMessage: string | null;
     loading: boolean;
 }

@@ -3,4 +3,7 @@ export type User = {
     email: string | null;
     password: string | null;
     profilePicture: string | null;
+    bio: string;
+    about: string;
+    links: string[];
 };
