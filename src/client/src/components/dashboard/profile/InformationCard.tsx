@@ -5,7 +5,16 @@ import { User } from '../../../types/user';
 
 export default () => {
     const { currentUser } = useSelector((state: RootState) => state.user);
-    const { about } = currentUser as User;
+    const { about, createdAt } = currentUser as User;
+    const date = new Date(createdAt);
+    const formattedDate =
+        (date.getMonth() > 8
+            ? date.getMonth() + 1
+            : '0' + (date.getMonth() + 1)) +
+        '-' +
+        (date.getDate() > 9 ? date.getDate() : '0' + date.getDate()) +
+        '-' +
+        date.getFullYear();
     return (
         <Card>
             <Label className="text-2xl">General Information</Label>
@@ -15,7 +24,7 @@ export default () => {
             </div>
             <div className="flex flex-col">
                 <Label className="text-gray-600">Join Date</Label>
-                <Label className="text-md">06-05-2024</Label>
+                <Label className="text-md">{formattedDate}</Label>
             </div>
         </Card>
     );

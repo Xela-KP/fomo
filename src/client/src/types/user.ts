@@ -7,4 +7,5 @@ export type User = {
     bio: string;
     about: string;
     links: string[];
+    createdAt: string;
 };
