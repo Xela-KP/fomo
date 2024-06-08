@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice, current } from '@reduxjs/toolkit';
 import type { User } from '../../types/user';
 
 export interface UsersState {
@@ -36,9 +36,31 @@ const userSlice = createSlice({
         updateAbout: (state, action: PayloadAction<string>) => {
             if (state.currentUser) state.currentUser.about = action.payload;
         },
+        removeLink: (state, action: PayloadAction<string>) => {
+            if (state.currentUser) {
+                var i = 0;
+                while (i < state.currentUser.links.length) {
+                    if (state.currentUser.links[i] === action.payload) {
+                        state.currentUser.links.splice(i, 1);
+                    } else {
+                        ++i;
+                    }
+                }
+            }
+        },
+        addLink: (state, action: PayloadAction<string>) => {
+            if (state.currentUser) state.currentUser.links.push(action.payload);
+        },
     },
 });
 
-export const { loginStart, loginSuccess, loginFail, updateBio, updateAbout } =
-    userSlice.actions;
+export const {
+    loginStart,
+    loginSuccess,
+    loginFail,
+    updateBio,
+    updateAbout,
+    removeLink,
+    addLink,
+} = userSlice.actions;
 export default userSlice.reducer;

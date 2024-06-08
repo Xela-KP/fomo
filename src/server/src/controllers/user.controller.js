@@ -31,4 +31,15 @@ export const putAbout = async (req, res) => {
     }
 };
 
-export const patchLinks = (req, res) => {};
+export const patchLinks = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { remove, link } = req.body;
+        remove
+            ? await User.findByIdAndUpdate(id, { $pull: { links: link } })
+            : await User.findByIdAndUpdate(id, { $push: { links: link } });
+        res.status(200).send({ message: 'links updated successfully' });
+    } catch (error) {
+        createError(400, error.message);
+    }
+};
