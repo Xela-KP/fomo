@@ -27,9 +27,18 @@ const schema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
-        bio: String,
-        about: String,
-        links: [String],
+        bio: {
+            type: String,
+            default: '',
+        },
+        about: {
+            type: String,
+            default: '',
+        },
+        links: {
+            type: [String],
+            default: [],
+        },
     },
     { timestamps: true }
 );

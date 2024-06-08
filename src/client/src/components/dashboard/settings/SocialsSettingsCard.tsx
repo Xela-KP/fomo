@@ -3,19 +3,22 @@ import { IoMdAdd, IoMdRemove } from 'react-icons/io';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { User } from '../../../types/user';
-import { JSX } from 'react/jsx-runtime';
 
 const getLinkSpans = (links: string[]) => {
-    const spans: JSX.Element[] = [];
-    for (const link of links) {
-        spans.push(
-            <span className="flex flex-row gap-2 w-fit">
-                <a href={link}>{link}</a>
-                <IoMdRemove className="self-center cursor-pointer" />
-            </span>
+    let id = 0;
+    const listItems = links.map((link) => {
+        return (
+            <li key={id++}>
+                <span className="flex flex-row gap-2 w-fit">
+                    <a className="hover:underline" href={link}>
+                        {link}
+                    </a>
+                    <IoMdRemove className="self-center cursor-pointer" />
+                </span>
+            </li>
         );
-    }
-    return spans;
+    });
+    return <ul>{listItems}</ul>;
 };
 
 export default () => {
@@ -24,13 +27,14 @@ export default () => {
     return (
         <Card>
             <Label className="text-lg text-bold">Socials</Label>
-            <div className="flex lg:flex-col justify-center flex-wrap gap-4">
+            <div className="flex flex-col justify-center flex-wrap gap-4">
                 {getLinkSpans(links)}
                 <Button
+                    size="xs"
                     outline
                     pill
                     gradientDuoTone="tealToLime"
-                    className="w-fit"
+                    className="w-fit self-center"
                 >
                     <IoMdAdd className="self-center" />
                 </Button>

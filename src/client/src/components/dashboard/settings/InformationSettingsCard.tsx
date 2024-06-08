@@ -12,7 +12,7 @@ export default () => {
             <Label className="text-2xl">General Information</Label>
             <div>
                 <Label className="text-md">About me</Label>
-                <Textarea rows={5}>{about}</Textarea>
+                <Textarea rows={5} value={about} onChange={saveAbout} />
             </div>
             <Button
                 outline

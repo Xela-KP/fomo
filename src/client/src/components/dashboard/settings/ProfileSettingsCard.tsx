@@ -1,11 +1,33 @@
-import { Card, TextInput } from 'flowbite-react';
-import { useSelector } from 'react-redux';
+import { Button, Card, TextInput } from 'flowbite-react';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { User } from '../../../types/user';
+import { ChangeEventHandler, MouseEventHandler, useState } from 'react';
+import { updateBio } from '../../../redux/user/userSlice';
 
 export default () => {
+    const dispatch = useDispatch();
     const { currentUser } = useSelector((state: RootState) => state.user);
-    const { username, profilePicture } = currentUser as User;
+    const { _id, username, profilePicture, bio } = currentUser as User;
+    let [clientBio, setClientBio] = useState(bio);
+    const onBioChange: ChangeEventHandler<HTMLInputElement> = (e) =>
+        setClientBio(e.target.value);
+    const updateUserBio: MouseEventHandler = async () => {
+        const body = { bio: clientBio };
+        const req: RequestInit = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+        };
+        const res = await fetch(`/api/users/user/${_id}/bio`, req);
+        if (res.ok) {
+            dispatch(updateBio(clientBio));
+        }
+        try {
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <Card className="">
             <div className="w-64 p-3">
@@ -23,7 +45,23 @@ export default () => {
                         @{username}
                     </a>
                 </p>
-                <TextInput placeholder="Bio"></TextInput>
+                <span className="flex flex-row gap-2">
+                    <TextInput
+                        placeholder="Bio"
+                        value={clientBio}
+                        onChange={onBioChange}
+                    />
+                    <Button
+                        size="xs"
+                        outline
+                        pill
+                        gradientDuoTone="tealToLime"
+                        className="w-fit self-center"
+                        onClick={updateUserBio}
+                    >
+                        Save
+                    </Button>
+                </span>
                 <p className="mb-4 text-sm"></p>
                 <ul className="flex text-sm">
                     <li className="me-2">
