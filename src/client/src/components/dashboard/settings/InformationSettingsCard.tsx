@@ -23,7 +23,7 @@ export default () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body),
             };
-            const res = await fetch(`/api/users/user/${_id}/about`, req);
+            const res = await fetch(`/api/user/update/${_id}/about`, req);
             if (res.ok) dispatch(updateAbout(clientAbout));
         } catch (error) {
             console.log(error);

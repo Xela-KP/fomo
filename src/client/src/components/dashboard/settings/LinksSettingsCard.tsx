@@ -44,7 +44,7 @@ export default () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body),
             };
-            const res = await fetch(`/api/users/user/${_id}/links`, req);
+            const res = await fetch(`/api/user/update/${_id}/links`, req);
             if (res.ok) dispatch(removeLink(link));
         } catch (error) {
             console.log(error);
@@ -59,7 +59,7 @@ export default () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body),
             };
-            const res = await fetch(`/api/users/user/${_id}/links`, req);
+            const res = await fetch(`/api/user/update/${_id}/links`, req);
             if (res.ok) dispatch(addLink(link));
         } catch (error) {
             console.log(error);

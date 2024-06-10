@@ -67,10 +67,7 @@ export default () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body),
             };
-            const res = await fetch(
-                `/api/users/user/${currentUser?._id}/pfp`,
-                req
-            );
+            const res = await fetch(`/api/user/update/${_id}/pfp`, req);
             if (res.ok) {
                 dispatch(updateProfilePicture(downloadURL));
             }
@@ -106,7 +103,7 @@ export default () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
         };
-        const res = await fetch(`/api/users/user/${_id}/bio`, req);
+        const res = await fetch(`/api/user/update/${_id}/bio`, req);
         if (res.ok) {
             dispatch(updateBio(clientBio));
         }
