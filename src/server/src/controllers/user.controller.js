@@ -43,3 +43,15 @@ export const patchLinks = async (req, res) => {
         createError(400, error.message);
     }
 };
+
+export const putProfilePicture = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { newImageUrl } = req.body;
+        if (!newImageUrl) throw new Error('No image url provided');
+        await User.findByIdAndUpdate(id, { profilePicture: newImageUrl });
+        res.status(200).send({ message: 'pfp updated successfully' });
+    } catch (error) {
+        createError(400, error.message);
+    }
+};

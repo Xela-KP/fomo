@@ -1,17 +1,104 @@
-import { Button, Card, TextInput } from 'flowbite-react';
+import { Alert, Button, Card, TextInput } from 'flowbite-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { User } from '../../../types/user';
-import { ChangeEventHandler, MouseEventHandler, useState } from 'react';
-import { updateBio } from '../../../redux/user/userSlice';
+import {
+    ChangeEvent,
+    ChangeEventHandler,
+    MouseEventHandler,
+    useEffect,
+    useRef,
+    useState,
+} from 'react';
+import { updateBio, updateProfilePicture } from '../../../redux/user/userSlice';
+import {
+    StorageError,
+    UploadTaskSnapshot,
+    getDownloadURL,
+    getStorage,
+    ref,
+    uploadBytesResumable,
+} from 'firebase/storage';
+import { app } from '../../../firebase';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 export default () => {
     const dispatch = useDispatch();
     const { currentUser } = useSelector((state: RootState) => state.user);
     const { _id, username, profilePicture, bio } = currentUser as User;
-    let [clientBio, setClientBio] = useState(bio);
+    const [clientBio, setClientBio] = useState<string>(bio);
+    const [imageFile, setImageFile] = useState<File>();
+    const [uploadProgess, setUploadProgess] = useState<number>(0);
+    const [uploading, setUploading] = useState<boolean>(false);
+    const [uploadError, setUploadError] = useState<string>();
+    const filePickerRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (imageFile && imageFile.name.match(/\.(jpg|jpeg|png|gif)$/i))
+            uploadImage();
+    }, [imageFile]);
+
+    const uploadImage = async () => {
+        setUploadError(undefined);
+        setUploading(true);
+        const storage = getStorage(app);
+        const fileName = new Date().getTime() + (imageFile as File).name;
+        const storageRef = ref(storage, fileName);
+        const uploadTask = uploadBytesResumable(storageRef, imageFile as File);
+
+        const observeProgress = (snapshot: UploadTaskSnapshot) => {
+            const progress =
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            setUploadProgess(parseInt(progress.toFixed(0)));
+        };
+
+        const onError = (error: StorageError) => {
+            setUploadError(error.message);
+            setUploading(false);
+        };
+
+        const onComplete = async () => {
+            const snapshotRef = uploadTask.snapshot.ref;
+            const downloadURL = await getDownloadURL(snapshotRef);
+            const body = { newImageUrl: downloadURL };
+            const req: RequestInit = {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body),
+            };
+            const res = await fetch(
+                `/api/users/user/${currentUser?._id}/pfp`,
+                req
+            );
+            if (res.ok) {
+                dispatch(updateProfilePicture(downloadURL));
+            }
+            setUploading(false);
+        };
+        uploadTask.on('state_changed', observeProgress, onError, onComplete);
+    };
+
+    const onImageChange: ChangeEventHandler<HTMLInputElement> = async (
+        e: ChangeEvent<HTMLInputElement>
+    ) => {
+        setUploadError(undefined);
+        try {
+            const files = e.target.files;
+            if (!files) throw new Error('No Files Selected');
+            const file = files[0];
+            if (!file.name.match(/\.(jpg|jpeg|png|gif)$/i))
+                throw new Error('File must be an image');
+            setImageFile(file);
+        } catch (error) {
+            console.log(error);
+            setUploadError('File must be an Image');
+        }
+    };
+
     const onBioChange: ChangeEventHandler<HTMLInputElement> = (e) =>
         setClientBio(e.target.value);
+
     const updateUserBio: MouseEventHandler = async () => {
         const body = { bio: clientBio };
         const req: RequestInit = {
@@ -28,17 +115,52 @@ export default () => {
             console.log(error);
         }
     };
+
     return (
         <Card className="">
             <div className="w-64 p-3">
-                <div className="mb-2 flex items-center justify-between">
-                    <a href="#">
+                <div className="mb-2 flex flex-col gap-2">
+                    <span className="relative w-fit h-fit">
+                        {uploading && (
+                            <CircularProgressbar
+                                value={uploadProgess || 0}
+                                text={`${uploadProgess}%`}
+                                strokeWidth={5}
+                                styles={{
+                                    root: {
+                                        width: '100%',
+                                        height: '100%',
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0,
+                                    },
+                                    path: {
+                                        stroke: `rgba(62, 152, 199, ${
+                                            uploadProgess / 100
+                                        })`,
+                                    },
+                                }}
+                            />
+                        )}
                         <img
-                            className="h-10 w-10 rounded-full"
+                            className="h-10 w-10 rounded-full cursor-pointer"
                             src={profilePicture as string}
                             alt={username as string}
+                            onClick={() => filePickerRef.current?.click()}
                         />
-                    </a>
+                    </span>
+
+                    <input
+                        disabled={uploading}
+                        type="file"
+                        accept="image/.*"
+                        onChange={onImageChange}
+                        ref={filePickerRef}
+                        hidden
+                    />
+                    {uploadError && (
+                        <Alert color="failure">{uploadError}</Alert>
+                    )}
                 </div>
                 <p className="text-base font-semibold leading-none text-gray-900 dark:text-white mb-2">
                     <a href="#" className="hover:underline">

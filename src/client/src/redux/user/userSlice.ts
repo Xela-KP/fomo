@@ -30,6 +30,10 @@ const userSlice = createSlice({
             state.loading = false;
             state.errorMessage = action.payload;
         },
+        updateProfilePicture: (state, action: PayloadAction<string>) => {
+            if (state.currentUser)
+                state.currentUser.profilePicture = action.payload;
+        },
         updateBio: (state, action: PayloadAction<string>) => {
             if (state.currentUser) state.currentUser.bio = action.payload;
         },
@@ -62,5 +66,6 @@ export const {
     updateAbout,
     removeLink,
     addLink,
+    updateProfilePicture,
 } = userSlice.actions;
 export default userSlice.reducer;
