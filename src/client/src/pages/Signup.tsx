@@ -15,7 +15,7 @@ export default () => {
     const [pwdPrompt, setPwdPrompt] = useState('show');
     const [pwdType, setPwdType] = useState('password');
     const [loading, setLoading] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState<string>();
     const [formData, setFormData] = useState({});
     const navigate = useNavigate();
 
@@ -37,7 +37,20 @@ export default () => {
 
     const handleSubmit: FormEventHandler = async (e: FormEvent) => {
         e.preventDefault();
-        setErrorMessage('');
+        setErrorMessage(undefined);
+        const { username, password } = formData as {
+            username: string;
+            email: string;
+            password: string;
+        };
+        if (username.length < 3) {
+            setErrorMessage('Username must contain 3 characters or more');
+            return setLoading(false);
+        }
+        if (password.length < 8) {
+            setErrorMessage('Password must contain 8 characters or more');
+            return setLoading(false);
+        }
         try {
             setLoading(true);
             const req: RequestInit = {
@@ -47,8 +60,12 @@ export default () => {
             };
             const res = await fetch('/api/auth/signup', req);
             const data = await res.json();
-            if (data.success === false) return setErrorMessage(data.message);
-            navigate('../login');
+            console.log(data);
+            if (data.success === true) navigate('../login');
+            else
+                setErrorMessage(
+                    'An account with the provided username or email already exists.'
+                );
         } catch (error: any) {
             setErrorMessage(error.message);
         }
