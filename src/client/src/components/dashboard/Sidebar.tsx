@@ -22,7 +22,7 @@ export default ({ tab }: { tab: string }) => {
                             Profile
                         </Sidebar.Item>
                     </Link>
-                    <Link to="?tab=friends">
+                    {/* <Link to="?tab=friends">
                         <Sidebar.Item
                             as="div"
                             active={tab === 'friends'}
@@ -40,7 +40,7 @@ export default ({ tab }: { tab: string }) => {
                         >
                             Inbox
                         </Sidebar.Item>
-                    </Link>
+                    </Link> */}
                 </Sidebar.ItemGroup>
                 <Sidebar.ItemGroup>
                     <Link to="?tab=settings">

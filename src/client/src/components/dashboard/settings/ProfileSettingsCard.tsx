@@ -182,7 +182,7 @@ export default () => {
                     </Button>
                 </span>
                 <p className="mb-4 text-sm"></p>
-                <ul className="flex text-sm">
+                {/* <ul className="flex text-sm">
                     <li className="me-2">
                         <a href="#" className="hover:underline">
                             <span className="font-semibold text-gray-900 dark:text-white">
@@ -199,7 +199,7 @@ export default () => {
                             <span>Followers</span>
                         </a>
                     </li>
-                </ul>
+                </ul> */}
             </div>
         </Card>
     );
