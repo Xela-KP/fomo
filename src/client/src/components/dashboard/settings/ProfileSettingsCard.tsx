@@ -1,4 +1,4 @@
-import { Alert, Button, Card, TextInput } from 'flowbite-react';
+import { Alert, Button, Card, Modal, TextInput } from 'flowbite-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { User } from '../../../types/user';
@@ -10,7 +10,11 @@ import {
     useRef,
     useState,
 } from 'react';
-import { updateBio, updateProfilePicture } from '../../../redux/user/userSlice';
+import {
+    resetUserState,
+    updateBio,
+    updateProfilePicture,
+} from '../../../redux/user/userSlice';
 import {
     StorageError,
     UploadTaskSnapshot,
@@ -22,6 +26,7 @@ import {
 import { app } from '../../../firebase';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { HiOutlineExclamationCircle } from 'react-icons/hi2';
 
 export default () => {
     const dispatch = useDispatch();
@@ -33,6 +38,7 @@ export default () => {
     const [uploading, setUploading] = useState<boolean>(false);
     const [uploadError, setUploadError] = useState<string>();
     const filePickerRef = useRef<HTMLInputElement>(null);
+    const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 
     useEffect(() => {
         if (imageFile && imageFile.name.match(/\.(jpg|jpeg|png|gif)$/i))
@@ -116,7 +122,8 @@ export default () => {
     const deleteAccount = async () => {
         try {
             const req: RequestInit = { method: 'DELETE' };
-            await fetch(`/api/user/delete/${_id}`, req);
+            const res = await fetch(`/api/user/delete/${_id}`, req);
+            if (res.ok) dispatch(resetUserState());
         } catch (error) {
             console.log(error);
         }
@@ -194,10 +201,39 @@ export default () => {
                     color="red"
                     size="xs"
                     className="w-fit mt-2"
-                    onClick={deleteAccount}
+                    onClick={() => setShowDeleteModal(true)}
                 >
                     Delete Account
                 </Button>
+                <Modal
+                    show={showDeleteModal}
+                    size="md"
+                    onClose={() => setShowDeleteModal(false)}
+                    popup
+                >
+                    <Modal.Header />
+                    <Modal.Body>
+                        <div className="text-center">
+                            <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+                            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                Are you sure you want to delete your account?{' '}
+                                <br />
+                                This action cannot be undone.
+                            </h3>
+                            <div className="flex justify-center gap-4">
+                                <Button color="failure" onClick={deleteAccount}>
+                                    {'Delete my account.'}
+                                </Button>
+                                <Button
+                                    color="gray"
+                                    onClick={() => setShowDeleteModal(false)}
+                                >
+                                    Cancel
+                                </Button>
+                            </div>
+                        </div>
+                    </Modal.Body>
+                </Modal>
                 <p className="mb-4 text-sm"></p>
                 {/* <ul className="flex text-sm">
                     <li className="me-2">

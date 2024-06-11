@@ -55,6 +55,11 @@ const userSlice = createSlice({
         addLink: (state, action: PayloadAction<string>) => {
             if (state.currentUser) state.currentUser.links.push(action.payload);
         },
+        resetUserState: (state) => {
+            state.currentUser = null;
+            state.errorMessage = null;
+            state.loading = false;
+        },
     },
 });
 
@@ -67,5 +72,6 @@ export const {
     removeLink,
     addLink,
     updateProfilePicture,
+    resetUserState,
 } = userSlice.actions;
 export default userSlice.reducer;

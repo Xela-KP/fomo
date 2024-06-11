@@ -3,9 +3,10 @@ import { FormEventHandler, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import Brand from './Brand';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { User } from '../types/user';
+import { resetUserState } from '../redux/user/userSlice';
 
 const SearchBar = () => {
     const handleSubmit: FormEventHandler = (e) => {
@@ -34,6 +35,8 @@ const ProfileDropdown = () => {
               profilePicture:
                   'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
           };
+
+    const dispatch = useDispatch();
     return (
         <div className="md:order-2">
             <Dropdown
@@ -75,7 +78,15 @@ const ProfileDropdown = () => {
                         </Link>
                     </>
                 )}
-                {currentUser && <Dropdown.Item>Log Out</Dropdown.Item>}
+                {currentUser && (
+                    <Dropdown.Item
+                        onClick={() => {
+                            dispatch(resetUserState());
+                        }}
+                    >
+                        Log Out
+                    </Dropdown.Item>
+                )}
             </Dropdown>
         </div>
     );
