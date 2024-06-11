@@ -1,10 +1,8 @@
 import e from 'express';
-import { root, test, user } from '../controllers/user.controller.js';
+import { deleteUser } from '../controllers/user.controller.js';
+import { verifyUser } from '../utils/verifyUser.js';
 
 const router = e.Router();
-
-router.get('/', root);
-router.get('/user', user);
-router.get('/test', test);
+router.delete('/delete/:id', verifyUser, deleteUser);
 
 export default router;

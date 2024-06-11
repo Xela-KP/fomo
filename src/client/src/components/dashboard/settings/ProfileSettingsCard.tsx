@@ -113,6 +113,15 @@ export default () => {
         }
     };
 
+    const deleteAccount = async () => {
+        try {
+            const req: RequestInit = { method: 'DELETE' };
+            await fetch(`/api/user/delete/${_id}`, req);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <Card className="">
             <div className="w-64 p-3">
@@ -146,7 +155,6 @@ export default () => {
                             onClick={() => filePickerRef.current?.click()}
                         />
                     </span>
-
                     <input
                         disabled={uploading}
                         type="file"
@@ -181,6 +189,15 @@ export default () => {
                         Save
                     </Button>
                 </span>
+
+                <Button
+                    color="red"
+                    size="xs"
+                    className="w-fit mt-2"
+                    onClick={deleteAccount}
+                >
+                    Delete Account
+                </Button>
                 <p className="mb-4 text-sm"></p>
                 {/* <ul className="flex text-sm">
                     <li className="me-2">

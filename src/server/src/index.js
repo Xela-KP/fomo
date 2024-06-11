@@ -23,7 +23,7 @@ const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
 app.use(e.json());
 app.use(cookieParser());
-// app.use('/api/user', userRoutes);
+app.use('/api/user', userRoutes);
 app.use('/api/user/update', userUpdateRoutes);
 app.use('/api/auth', authRoutes);
 app.use(errorHandler);

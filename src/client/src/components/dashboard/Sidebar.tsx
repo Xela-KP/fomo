@@ -1,11 +1,5 @@
 import { Sidebar } from 'flowbite-react';
-import {
-    HiCog,
-    HiUserCircle,
-    HiArrowSmRight,
-    HiInbox,
-    HiUser,
-} from 'react-icons/hi';
+import { HiCog, HiUserCircle, HiArrowSmRight } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 
 export default ({ tab }: { tab: string }) => {
