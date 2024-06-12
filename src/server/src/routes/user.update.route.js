@@ -1,12 +1,14 @@
-import e from 'express';
-const router = e.Router();
 import {
-    putBio,
-    putAbout,
     patchLinks,
+    putAbout,
+    putBio,
     putProfilePicture,
 } from '../controllers/user.update.controller.js';
-import { verifyUser } from '../utils/verifyUser.js';
+
+import e from 'express';
+import { verifyUser } from '../utils/user.util.js';
+
+const router = e.Router();
 
 router.put('/:id/bio', verifyUser, putBio);
 router.put('/:id/about', verifyUser, putAbout);

@@ -1,12 +1,11 @@
+import authRoutes from './routes/auth.route.js';
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';
 import e from 'express';
+import { errorHandler } from './utils/error.util.js';
+import mongoose from 'mongoose';
 import userRoutes from './routes/user.route.js';
 import userUpdateRoutes from './routes/user.update.route.js';
-import authRoutes from './routes/auth.route.js';
-import { errorHandler } from './controllers/error.controller.js';
-import cookieParser from 'cookie-parser';
-import { getUser } from './controllers/user.controller.js';
 
 dotenv.config();
 

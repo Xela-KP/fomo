@@ -1,6 +1,7 @@
-import e from 'express';
 import { deleteUser, getUser } from '../controllers/user.controller.js';
-import { verifyUser } from '../utils/verifyUser.js';
+
+import e from 'express';
+import { verifyUser } from '../utils/user.util.js';
 
 const router = e.Router();
 router.get('/:username', getUser);

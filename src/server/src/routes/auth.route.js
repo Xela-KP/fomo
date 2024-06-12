@@ -1,5 +1,6 @@
+import { googleLogin, login, signup } from '../controllers/auth.controller.js';
+
 import e from 'express';
-import { signup, login, googleLogin } from '../controllers/auth.controller.js';
 
 const router = e.Router();
 

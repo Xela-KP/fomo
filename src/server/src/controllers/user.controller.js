@@ -1,5 +1,5 @@
-import { createError } from '../utils/error.util.js';
 import User from '../models/user.model.js';
+import { createError } from '../utils/error.util.js';
 
 export const deleteUser = async (req, res, next) => {
     console.log(req.user.id, req.params.id);
