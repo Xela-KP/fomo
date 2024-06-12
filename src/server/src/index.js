@@ -6,6 +6,7 @@ import userUpdateRoutes from './routes/user.update.route.js';
 import authRoutes from './routes/auth.route.js';
 import { errorHandler } from './controllers/error.controller.js';
 import cookieParser from 'cookie-parser';
+import { getUser } from './controllers/user.controller.js';
 
 dotenv.config();
 

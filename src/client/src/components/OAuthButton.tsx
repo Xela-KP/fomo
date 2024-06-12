@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { loginFail, loginSuccess } from '../redux/user/userSlice';
 import { useNavigate } from 'react-router-dom';
 
-export default () => {
+export default function () {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleGoogleAuthRequest = async () => {
@@ -50,4 +50,4 @@ export default () => {
             <span className="ml-2">Continue with Google</span>
         </Button>
     );
-};
+}

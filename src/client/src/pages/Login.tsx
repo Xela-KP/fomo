@@ -13,7 +13,7 @@ import { loginStart, loginSuccess, loginFail } from '../redux/user/userSlice';
 import type { RootState } from '../redux/store';
 import OAuthButton from '../components/OAuthButton';
 
-export default () => {
+export default function () {
     const [showPwd, setShowPwd] = useState(false);
     const [pwdPrompt, setPwdPrompt] = useState('show');
     const [pwdType, setPwdType] = useState('password');
@@ -119,4 +119,4 @@ export default () => {
             </div>
         </div>
     );
-};
+}

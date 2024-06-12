@@ -1,11 +1,8 @@
 import { Card, Label } from 'flowbite-react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
 import { User } from '../../../types/user';
 
-export default () => {
-    const { currentUser } = useSelector((state: RootState) => state.user);
-    const { about, createdAt } = currentUser as User;
+export default ({ user }: { user: User }) => {
+    const { about, createdAt } = user;
     const date = new Date(createdAt);
     const formattedDate =
         (date.getMonth() > 8

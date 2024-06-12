@@ -1,11 +1,8 @@
 import { Card } from 'flowbite-react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
 import { User } from '../../../types/user';
 
-export default () => {
-    const { currentUser } = useSelector((state: RootState) => state.user);
-    const { bio, username, profilePicture } = currentUser as User;
+export default ({ user }: { user: User }) => {
+    const { bio, username, profilePicture } = user;
     return (
         <Card className="">
             <div className="w-64 p-3">

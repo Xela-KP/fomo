@@ -1,10 +1,7 @@
 import { Card, Label } from 'flowbite-react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
 import { User } from '../../../types/user';
-export default () => {
-    const { currentUser } = useSelector((state: RootState) => state.user);
-    const { links } = currentUser as User;
+export default ({ user }: { user: User }) => {
+    const { links } = user;
 
     const getLinkSpans = () => {
         let id = 0;
