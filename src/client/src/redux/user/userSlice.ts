@@ -42,7 +42,7 @@ const userSlice = createSlice({
         },
         removeLink: (state, action: PayloadAction<string>) => {
             if (state.currentUser) {
-                var i = 0;
+                let i = 0;
                 while (i < state.currentUser.links.length) {
                     if (state.currentUser.links[i] === action.payload) {
                         state.currentUser.links.splice(i, 1);

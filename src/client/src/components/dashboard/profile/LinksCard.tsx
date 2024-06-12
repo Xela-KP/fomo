@@ -1,6 +1,8 @@
 import { Card, Label } from 'flowbite-react';
-import { User } from '../../../types/user';
-export default ({ user }: { user: User }) => {
+
+import type { User } from '../../../types/user';
+
+export const LinksCard = ({ user }: { user: User }) => {
     const { links } = user;
 
     const getLinkSpans = () => {

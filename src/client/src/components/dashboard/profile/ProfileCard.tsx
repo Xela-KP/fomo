@@ -1,7 +1,7 @@
 import { Card } from 'flowbite-react';
-import { User } from '../../../types/user';
+import type { User } from '../../../types/user';
 
-export default ({ user }: { user: User }) => {
+export const ProfileCard = ({ user }: { user: User }) => {
     const { bio, username, profilePicture } = user;
     return (
         <Card className="">

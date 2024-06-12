@@ -1,12 +1,14 @@
 import { Button, Card, Label, Modal, TextInput } from 'flowbite-react';
 import { IoMdAdd, IoMdRemove } from 'react-icons/io';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import { User } from '../../../types/user';
-import { MouseEventHandler, useRef, useState } from 'react';
 import { addLink, removeLink } from '../../../redux/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRef, useState } from 'react';
 
-export default () => {
+import type { MouseEventHandler } from 'react';
+import type { RootState } from '../../../redux/store';
+import type { User } from '../../../types/user';
+
+export const LinksSettingsCard = () => {
     const { currentUser } = useSelector((state: RootState) => state.user);
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch();

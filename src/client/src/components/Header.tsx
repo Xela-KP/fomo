@@ -1,12 +1,14 @@
-import { Navbar, Dropdown, Avatar, TextInput } from 'flowbite-react';
-import { FormEventHandler, useState } from 'react';
-import { AiOutlineSearch } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
-import Brand from './Brand';
+import { Avatar, Dropdown, Navbar, TextInput } from 'flowbite-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
-import { User } from '../types/user';
+
+import { AiOutlineSearch } from 'react-icons/ai';
+import { Brand } from './Brand';
+import type { FormEventHandler } from 'react';
+import { Link } from 'react-router-dom';
+import type { RootState } from '../redux/store';
+import type { User } from '../types/user';
 import { resetUserState } from '../redux/user/userSlice';
+import { useState } from 'react';
 
 const SearchBar = () => {
     const handleSubmit: FormEventHandler = (e) => {
@@ -92,7 +94,7 @@ const ProfileDropdown = () => {
     );
 };
 
-export default () => {
+export const PageHeader = () => {
     return (
         <Navbar fluid rounded>
             <span className="flex gap-10 items-center">

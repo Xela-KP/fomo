@@ -1,11 +1,13 @@
 import { Button, Card, Label, Textarea } from 'flowbite-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import { User } from '../../../types/user';
-import { ChangeEventHandler, useState } from 'react';
-import { updateAbout } from '../../../redux/user/userSlice';
 
-export default () => {
+import type { ChangeEventHandler } from 'react';
+import type { RootState } from '../../../redux/store';
+import type { User } from '../../../types/user';
+import { updateAbout } from '../../../redux/user/userSlice';
+import { useState } from 'react';
+
+export const InformationSettingsCard = () => {
     const { currentUser } = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch();
     const { _id, about } = currentUser as User;

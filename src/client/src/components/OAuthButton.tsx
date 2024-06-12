@@ -1,12 +1,13 @@
+import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+import { loginFail, loginSuccess } from '../redux/user/userSlice';
+
 import { Button } from 'flowbite-react';
 import { FcGoogle } from 'react-icons/fc';
-import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth';
 import { app } from '../firebase';
 import { useDispatch } from 'react-redux';
-import { loginFail, loginSuccess } from '../redux/user/userSlice';
 import { useNavigate } from 'react-router-dom';
 
-export default function () {
+export const OAuthButton = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleGoogleAuthRequest = async () => {
@@ -50,4 +51,4 @@ export default function () {
             <span className="ml-2">Continue with Google</span>
         </Button>
     );
-}
+};

@@ -1,8 +1,9 @@
-import { Footer } from 'flowbite-react';
 import { BsFacebook, BsGithub, BsInstagram } from 'react-icons/bs';
-import Brand from './Brand';
 
-export default () => {
+import { Brand } from './Brand';
+import { Footer } from 'flowbite-react';
+
+export const PageFooter = () => {
     return (
         <Footer container className=" border-t-4 border-teal-600">
             <div className="w-full">

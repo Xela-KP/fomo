@@ -1,9 +1,9 @@
-import InformationCard from '../components/dashboard/profile/InformationCard';
-import ProfileCard from '../components/dashboard/profile/ProfileCard';
-import LinksCard from '../components/dashboard/profile/LinksCard';
-import { User } from '../types/user';
+import { InformationCard } from '../components/dashboard/profile/InformationCard';
+import { LinksCard } from '../components/dashboard/profile/LinksCard';
+import { ProfileCard } from '../components/dashboard/profile/ProfileCard';
+import type { User } from '../types/user';
 
-export default function ({ user }: { user: User }) {
+export const ProfilePage = ({ user }: { user: User }) => {
     return (
         <div className="flex lg:flex-row flex-col flex-grow gap-2 p-6">
             <div className="flex basis-1/4 flex-col gap-2 w-full">
@@ -15,4 +15,4 @@ export default function ({ user }: { user: User }) {
             </div>
         </div>
     );
-}
+};

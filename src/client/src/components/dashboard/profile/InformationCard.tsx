@@ -1,17 +1,15 @@
 import { Card, Label } from 'flowbite-react';
-import { User } from '../../../types/user';
 
-export default ({ user }: { user: User }) => {
+import type { User } from '../../../types/user';
+
+export const InformationCard = ({ user }: { user: User }) => {
     const { about, createdAt } = user;
     const date = new Date(createdAt);
-    const formattedDate =
-        (date.getMonth() > 8
-            ? date.getMonth() + 1
-            : '0' + (date.getMonth() + 1)) +
-        '-' +
-        (date.getDate() > 9 ? date.getDate() : '0' + date.getDate()) +
-        '-' +
-        date.getFullYear();
+    const formattedDate = `${
+        date.getMonth() > 8 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`
+    }-${
+        date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`
+    }-${date.getFullYear()}`;
     return (
         <Card>
             <Label className="text-2xl">General Information</Label>

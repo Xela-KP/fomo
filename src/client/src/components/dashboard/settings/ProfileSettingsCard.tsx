@@ -1,34 +1,30 @@
+import 'react-circular-progressbar/dist/styles.css';
+
 import { Alert, Button, Card, Modal, TextInput } from 'flowbite-react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import { User } from '../../../types/user';
-import {
-    ChangeEvent,
-    ChangeEventHandler,
-    MouseEventHandler,
-    useEffect,
-    useRef,
-    useState,
-} from 'react';
-import {
-    resetUserState,
-    updateBio,
-    updateProfilePicture,
-} from '../../../redux/user/userSlice';
+import type { ChangeEvent, ChangeEventHandler, MouseEventHandler } from 'react';
 import {
     StorageError,
-    UploadTaskSnapshot,
     getDownloadURL,
     getStorage,
     ref,
     uploadBytesResumable,
 } from 'firebase/storage';
-import { app } from '../../../firebase';
-import { CircularProgressbar } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
-import { HiOutlineExclamationCircle } from 'react-icons/hi2';
+import {
+    resetUserState,
+    updateBio,
+    updateProfilePicture,
+} from '../../../redux/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
 
-export default () => {
+import { CircularProgressbar } from 'react-circular-progressbar';
+import { HiOutlineExclamationCircle } from 'react-icons/hi2';
+import type { RootState } from '../../../redux/store';
+import type { UploadTaskSnapshot } from 'firebase/storage';
+import type { User } from '../../../types/user';
+import { app } from '../../../firebase';
+
+export const ProfileSettingsCard = () => {
     const dispatch = useDispatch();
     const { currentUser } = useSelector((state: RootState) => state.user);
     const { _id, username, profilePicture, bio } = currentUser as User;
@@ -41,11 +37,9 @@ export default () => {
     const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 
     useEffect(() => {
-        if (imageFile && imageFile.name.match(/\.(jpg|jpeg|png|gif)$/i))
-            uploadImage();
-    }, [imageFile]);
+        if (!(imageFile && imageFile.name.match(/\.(jpg|jpeg|png|gif)$/i)))
+            return;
 
-    const uploadImage = async () => {
         setUploadError(undefined);
         setUploading(true);
         const storage = getStorage(app);
@@ -80,16 +74,16 @@ export default () => {
             setUploading(false);
         };
         uploadTask.on('state_changed', observeProgress, onError, onComplete);
-    };
+    }, [imageFile, dispatch, _id]);
 
-    const onImageChange: ChangeEventHandler<HTMLInputElement> = async (
+    const onImageChange: ChangeEventHandler<HTMLInputElement> = (
         e: ChangeEvent<HTMLInputElement>
     ) => {
         setUploadError(undefined);
         try {
-            const files = e.target.files;
+            const { files } = e.target;
             if (!files) throw new Error('No Files Selected');
-            const file = files[0];
+            const [file] = files;
             if (!file.name.match(/\.(jpg|jpeg|png|gif)$/i))
                 throw new Error('File must be an image');
             setImageFile(file);
@@ -103,17 +97,17 @@ export default () => {
         setClientBio(e.target.value);
 
     const updateUserBio: MouseEventHandler = async () => {
-        const body = { bio: clientBio };
-        const req: RequestInit = {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body),
-        };
-        const res = await fetch(`/api/user/update/${_id}/bio`, req);
-        if (res.ok) {
-            dispatch(updateBio(clientBio));
-        }
         try {
+            const body = { bio: clientBio };
+            const req: RequestInit = {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body),
+            };
+            const res = await fetch(`/api/user/update/${_id}/bio`, req);
+            if (res.ok) {
+                dispatch(updateBio(clientBio));
+            }
         } catch (error) {
             console.log(error);
         }

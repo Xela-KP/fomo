@@ -1,1 +1,1 @@
-export default () => <h1>Inbox</h1>;
+export const Inbox = () => <h1>Inbox</h1>;

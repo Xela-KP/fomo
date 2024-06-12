@@ -1,10 +1,11 @@
-import { Sidebar } from 'flowbite-react';
-import { HiCog, HiUserCircle, HiArrowSmRight } from 'react-icons/hi';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { resetUserState } from '../../redux/user/userSlice';
+import { HiArrowSmRight, HiCog, HiUserCircle } from 'react-icons/hi';
 
-export default ({ tab }: { tab: string }) => {
+import { Link } from 'react-router-dom';
+import { Sidebar } from 'flowbite-react';
+import { resetUserState } from '../../redux/user/userSlice';
+import { useDispatch } from 'react-redux';
+
+export const DashboardSidebar = ({ tab }: { tab: string }) => {
     const dispatch = useDispatch();
     return (
         <Sidebar aria-label="Default sidebar example">

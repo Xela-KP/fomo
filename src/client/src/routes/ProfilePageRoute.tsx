@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { User } from '../types/user';
-import Profile from './Profile';
 
-export default function () {
+import { ProfilePage } from '../pages/ProfilePage';
+import type { User } from '../types/user';
+import { useParams } from 'react-router-dom';
+
+export const ProfilePageRoute = () => {
     const emptyUser: User = {
         _id: '',
         username: '',
@@ -34,5 +35,5 @@ export default function () {
         };
         fetchData();
     });
-    return <Profile user={user} />;
-}
+    return <ProfilePage user={user} />;
+};

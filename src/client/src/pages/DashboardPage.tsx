@@ -1,15 +1,16 @@
-import Sidebar from '../components/dashboard/Sidebar';
-import Profile from './Profile';
-import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import Friends from '../components/dashboard/Friends';
-import Settings from '../components/dashboard/Settings';
-import Inbox from '../components/dashboard/Inbox';
-import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
-import { User } from '../types/user';
 
-export default () => {
+import { DashboardSidebar } from '../components/dashboard/Sidebar';
+import { Friends } from '../components/dashboard/Friends';
+import { Inbox } from '../components/dashboard/Inbox';
+import { ProfilePage } from './ProfilePage';
+import type { RootState } from '../redux/store';
+import { Settings } from '../components/dashboard/Settings';
+import type { User } from '../types/user';
+import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+export const DashboardPage = () => {
     const { currentUser } = useSelector((state: RootState) => state.user);
     const [tab, setTab] = useState('');
     const location = useLocation();
@@ -23,7 +24,7 @@ export default () => {
             case 'settings':
                 return <Settings />;
             default:
-                return <Profile user={currentUser as User} />;
+                return <ProfilePage user={currentUser as User} />;
         }
     };
     useEffect(() => {
@@ -33,7 +34,7 @@ export default () => {
     }, [location.search]);
     return (
         <div className="flex flex-row min-h-screen">
-            <Sidebar tab={tab} />
+            <DashboardSidebar tab={tab} />
             {getComponent(tab)}
         </div>
     );
