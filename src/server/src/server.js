@@ -5,7 +5,6 @@ import e from 'express';
 import { errorHandler } from './utils/error.util.js';
 import mongoose from 'mongoose';
 import userRoutes from './routes/user.route.js';
-import userUpdateRoutes from './routes/user.update.route.js';
 
 dotenv.config();
 
@@ -24,6 +23,5 @@ app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
 app.use(e.json());
 app.use(cookieParser());
 app.use('/api/user', userRoutes);
-app.use('/api/user/update', userUpdateRoutes);
 app.use('/api/auth', authRoutes);
 app.use(errorHandler);
