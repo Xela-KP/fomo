@@ -1,34 +1,40 @@
 import mongoose from 'mongoose';
+
 const schema = new mongoose.Schema(
     {
         post: {
-            userID: {
+            hostId: {
                 type: String,
                 required: true,
             },
-            content: {
+            summary: {
                 type: String,
-                required: true,
-                unique: true,
             },
-            media: {
+            description: {
                 type: String,
                 default: null,
+                required: true,
             },
-            category: {
+            visibility: {
                 type: String,
                 required: true,
                 default: 'uncategorized',
             },
-            slug: {
-                type: String,
-                unique: true,
+            location: {
+                type: Location,
+            },
+            startDate: {
+                type: Date,
+                required: true,
+            },
+            endDate: {
+                type: Date,
+                required: true,
             },
         },
     },
     { timestamps: true }
 );
 
-const model = mongoose.model('Post', schema);
-
+const model = mongoose.model('Event', schema);
 export default model;
