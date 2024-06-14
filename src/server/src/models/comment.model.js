@@ -26,6 +26,6 @@ const schema = new mongoose.Schema(
     { timestamps: true }
 );
 
-const model = mongoose.model('Post', schema);
+const Comment = mongoose.model('Post', schema);
 
-export default model;
+export default Comment;

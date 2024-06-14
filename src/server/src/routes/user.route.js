@@ -8,7 +8,7 @@ import {
 } from '../controllers/user.controller.js';
 
 import e from 'express';
-import { verifyUser } from '../utils/user.util.js';
+import { verifyUser } from '../middleware/auth.middleware.js';
 
 const router = e.Router();
 router.get('/:username', getUser);

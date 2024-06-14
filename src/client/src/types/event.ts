@@ -5,7 +5,7 @@ export enum Visibility {
     Private = 'private',
 }
 export type Event = {
-    host: User;
+    hostId: User;
     name: string;
     about: string;
     summary?: string;

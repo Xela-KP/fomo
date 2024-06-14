@@ -1,4 +1,4 @@
-import { createError } from './error.util.js';
+import { createError } from '../utils/error.util.js';
 import jwt from 'jsonwebtoken';
 
 export const verifyUser = (req, res, next) => {
