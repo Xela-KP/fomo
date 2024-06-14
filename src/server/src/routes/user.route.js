@@ -7,10 +7,10 @@ import {
     putProfilePicture,
 } from '../controllers/user.controller.js';
 
-import e from 'express';
+import express from 'express';
 import { verifyUser } from '../middleware/auth.middleware.js';
 
-const router = e.Router();
+const router = express.Router();
 router.get('/:username', getUser);
 router.delete('/delete/:id', verifyUser, deleteUser);
 router.put('/update/:id/bio', verifyUser, putBio);

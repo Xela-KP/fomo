@@ -1,8 +1,8 @@
 import { googleLogin, login, signup } from '../controllers/auth.controller.js';
 
-import e from 'express';
+import express from 'express';
 
-const router = e.Router();
+const router = express.Router();
 
 router.post('/signup', signup);
 router.post('/login', login);
