@@ -1,11 +1,11 @@
-import { googleLogin, login, signup } from '../controllers/auth.controller.js';
-
+import authControls from '../controllers/authentication/index.js';
 import express from 'express';
 
 const router = express.Router();
+const controls = authControls();
 
-router.post('/signup', signup);
-router.post('/login', login);
-router.post('/google', googleLogin);
+router.post('/signup', controls.signup);
+router.post('/login', controls.login);
+router.post('/google', controls.googleLogin);
 
 export default router;
