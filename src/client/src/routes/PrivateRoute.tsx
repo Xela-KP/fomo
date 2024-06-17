@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
-import type { RootState } from '../redux/store';
+import type { RootState } from '@redux/store';
 import { useSelector } from 'react-redux';
 
 export const PrivateRoute = () => {

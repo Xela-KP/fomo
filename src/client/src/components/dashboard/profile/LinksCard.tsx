@@ -1,6 +1,6 @@
 import { Card, Label } from 'flowbite-react';
 
-import type { User } from '../../../types/user';
+import type User from '@shared/models/User';
 
 export const LinksCard = ({ user }: { user: User }) => {
     const { links } = user;

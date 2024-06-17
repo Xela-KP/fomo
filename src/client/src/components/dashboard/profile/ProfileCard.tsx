@@ -1,8 +1,8 @@
 import { Card } from 'flowbite-react';
-import type { User } from '../../../types/user';
+import type User from '@shared/models/User';
 
 export const ProfileCard = ({ user }: { user: User }) => {
-    const { bio, username, profilePicture } = user;
+    const { bio, username, pfp } = user;
     return (
         <Card className="">
             <div className="w-64 p-3">
@@ -10,14 +10,14 @@ export const ProfileCard = ({ user }: { user: User }) => {
                     <a href="#">
                         <img
                             className="h-10 w-10 rounded-full"
-                            src={profilePicture as string}
-                            alt={username as string}
+                            src={pfp}
+                            alt={username}
                         />
                     </a>
                 </div>
                 <p className="text-base font-semibold leading-none text-gray-900 dark:text-white mb-2">
                     <a href="#" className="hover:underline">
-                        @{username as string}
+                        @{username}
                     </a>
                 </p>
                 <p className="mb-4 text-sm">{bio}</p>

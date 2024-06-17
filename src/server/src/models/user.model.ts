@@ -1,8 +1,5 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
-import User from '../../../shared/models/User.js';
-
-export interface UserDocument extends User, Document {}
 const schema = new Schema(
     {
         username: { type: String, required: true, unique: true },
@@ -21,5 +18,5 @@ const schema = new Schema(
     { timestamps: true }
 );
 
-const UserModel = mongoose.model<UserDocument>('User', schema);
+const UserModel = mongoose.model('User', schema);
 export default UserModel;

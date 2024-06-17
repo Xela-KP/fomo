@@ -1,9 +1,9 @@
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
-import { loginFail, loginSuccess } from '../redux/user/userSlice';
+import { loginFail, loginSuccess } from '@redux/user/userSlice';
 
 import { Button } from 'flowbite-react';
 import { FcGoogle } from 'react-icons/fc';
-import { app } from '../firebase';
+import { app } from '@src/firebase';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,16 +17,16 @@ export const OAuthButton = () => {
         try {
             const googleResponse = await signInWithPopup(auth, provider);
             const user = {
-                username: googleResponse.user.displayName,
+                googleUsername: googleResponse.user.displayName,
                 email: googleResponse.user.email,
-                photoUrl: googleResponse.user.photoURL,
+                pfp: googleResponse.user.photoURL,
             };
             const req: RequestInit = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(user),
             };
-            const res = await fetch('/api/auth/google', req);
+            const res = await fetch('/api/google', req);
             const data = await res.json();
 
             if (data.success === false) {

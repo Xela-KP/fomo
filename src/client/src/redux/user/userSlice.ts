@@ -1,5 +1,5 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import type { User } from '../../types/user';
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
+import type User from '@shared/models/User';
 
 export interface UsersState {
     currentUser: User | null;
@@ -30,31 +30,31 @@ const userSlice = createSlice({
             state.loading = false;
             state.errorMessage = action.payload;
         },
-        updateProfilePicture: (state, action: PayloadAction<string>) => {
-            if (state.currentUser)
-                state.currentUser.profilePicture = action.payload;
-        },
-        updateBio: (state, action: PayloadAction<string>) => {
-            if (state.currentUser) state.currentUser.bio = action.payload;
-        },
-        updateAbout: (state, action: PayloadAction<string>) => {
-            if (state.currentUser) state.currentUser.about = action.payload;
-        },
-        removeLink: (state, action: PayloadAction<string>) => {
-            if (state.currentUser) {
-                let i = 0;
-                while (i < state.currentUser.links.length) {
-                    if (state.currentUser.links[i] === action.payload) {
-                        state.currentUser.links.splice(i, 1);
-                    } else {
-                        ++i;
-                    }
-                }
-            }
-        },
-        addLink: (state, action: PayloadAction<string>) => {
-            if (state.currentUser) state.currentUser.links.push(action.payload);
-        },
+        // updateProfilePicture: (state, action: PayloadAction<string>) => {
+        //     if (state.currentUser)
+        //         state.currentUser.profilePicture = action.payload;
+        // },
+        // updateBio: (state, action: PayloadAction<string>) => {
+        //     if (state.currentUser) state.currentUser.bio = action.payload;
+        // },
+        // updateAbout: (state, action: PayloadAction<string>) => {
+        //     if (state.currentUser) state.currentUser.about = action.payload;
+        // },
+        // removeLink: (state, action: PayloadAction<string>) => {
+        //     if (state.currentUser) {
+        //         let i = 0;
+        //         while (i < state.currentUser.links.length) {
+        //             if (state.currentUser.links[i] === action.payload) {
+        //                 state.currentUser.links.splice(i, 1);
+        //             } else {
+        //                 ++i;
+        //             }
+        //         }
+        //     }
+        // },
+        // addLink: (state, action: PayloadAction<string>) => {
+        //     if (state.currentUser) state.currentUser.links.push(action.payload);
+        // },
         resetUserState: (state) => {
             state.currentUser = null;
             state.errorMessage = null;
@@ -67,11 +67,11 @@ export const {
     loginStart,
     loginSuccess,
     loginFail,
-    updateBio,
-    updateAbout,
-    removeLink,
-    addLink,
-    updateProfilePicture,
+    // updateBio,
+    // updateAbout,
+    // removeLink,
+    // addLink,
+    // updateProfilePicture,
     resetUserState,
 } = userSlice.actions;
 export default userSlice.reducer;

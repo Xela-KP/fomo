@@ -1,7 +1,7 @@
-import { InformationCard } from '../components/dashboard/profile/InformationCard';
-import { LinksCard } from '../components/dashboard/profile/LinksCard';
-import { ProfileCard } from '../components/dashboard/profile/ProfileCard';
-import type { User } from '../types/user';
+import { InformationCard } from '@components/dashboard/profile/InformationCard';
+import { LinksCard } from '@components/dashboard/profile/LinksCard';
+import { ProfileCard } from '@components/dashboard/profile/ProfileCard';
+import type User from '@shared/models/User';
 
 export const ProfilePage = ({ user }: { user: User }) => {
     return (

@@ -1,20 +1,19 @@
 import { useEffect, useState } from 'react';
 
-import { ProfilePage } from '../pages/ProfilePage';
-import type { User } from '../types/user';
+import { ProfilePage } from '@pages/ProfilePage';
+import type User from '@shared/models/User';
 import { useParams } from 'react-router-dom';
 
 export const ProfilePageRoute = () => {
     const emptyUser: User = {
-        _id: '',
+        id: '',
         username: '',
         email: '',
         password: '',
-        profilePicture: '',
+        pfp: '',
         bio: '',
         about: '',
         links: [],
-        createdAt: '',
     };
     const { username } = useParams<string>();
     const [user, setUser] = useState<User>(emptyUser);

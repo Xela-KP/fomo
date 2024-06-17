@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 
-import { DashboardSidebar } from '../components/dashboard/Sidebar';
-import { Friends } from '../components/dashboard/Friends';
-import { Inbox } from '../components/dashboard/Inbox';
+import { DashboardSidebar } from '@components/dashboard/Sidebar';
+import { Friends } from '@components/dashboard/Friends';
+import { Inbox } from '@components/dashboard/Inbox';
 import { ProfilePage } from './ProfilePage';
-import type { RootState } from '../redux/store';
-import { Settings } from '../components/dashboard/Settings';
-import type { User } from '../types/user';
+import type { RootState } from '@redux/store';
+import { Settings } from '@components/dashboard/Settings';
+import type User from '@shared/models/User';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 

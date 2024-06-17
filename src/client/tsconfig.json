@@ -19,7 +19,18 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
-        "verbatimModuleSyntax": true
+        "verbatimModuleSyntax": true,
+
+        "baseUrl": ".",
+
+        "paths": {
+            "@src/*": ["./src/*"],
+            "@pages/*": ["./src/pages/*"],
+            "@components/*": ["./src/components/*"],
+            "@routes/*": ["./src/routes/*"],
+            "@redux/*": ["./src/redux/*"],
+            "@shared/*": ["../shared/*"]
+        }
     },
     "include": ["src"],
     "references": [{ "path": "./tsconfig.node.json" }]

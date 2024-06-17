@@ -5,9 +5,9 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { Brand } from './Brand';
 import type { FormEventHandler } from 'react';
 import { Link } from 'react-router-dom';
-import type { RootState } from '../redux/store';
-import type { User } from '../types/user';
-import { resetUserState } from '../redux/user/userSlice';
+import type { RootState } from '@redux/store';
+import type User from '@shared/models/User';
+import { resetUserState } from '@redux/user/userSlice';
 import { useState } from 'react';
 
 const SearchBar = () => {
@@ -30,12 +30,11 @@ const SearchBar = () => {
 
 const ProfileDropdown = () => {
     const { currentUser } = useSelector((state: RootState) => state.user);
-    const { username, profilePicture } = currentUser
+    const { username, pfp } = currentUser
         ? (currentUser as User)
         : {
               username: '',
-              profilePicture:
-                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+              pfp: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
           };
 
     const dispatch = useDispatch();
@@ -44,13 +43,7 @@ const ProfileDropdown = () => {
             <Dropdown
                 arrowIcon={false}
                 inline
-                label={
-                    <Avatar
-                        alt="User settings"
-                        img={profilePicture as string}
-                        rounded
-                    />
-                }
+                label={<Avatar alt="User settings" img={pfp} rounded />}
             >
                 {currentUser && (
                     <Dropdown.Header>

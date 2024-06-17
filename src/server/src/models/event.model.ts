@@ -1,8 +1,4 @@
-import mongoose, { Document, Schema } from 'mongoose';
-
-import Event from '../../../shared/models/Event.js';
-
-export interface EventDocument extends Event, Document {}
+import mongoose, { Schema } from 'mongoose';
 const schema = new Schema(
     {
         hostId: {
@@ -37,5 +33,5 @@ const schema = new Schema(
     { timestamps: true }
 );
 
-const EventModel = mongoose.model<EventDocument>('Event', schema);
+const EventModel = mongoose.model('Event', schema);
 export default EventModel;
