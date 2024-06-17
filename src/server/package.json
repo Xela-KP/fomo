@@ -6,10 +6,11 @@
     "license": "ISC",
     "author": "Alexander Perocho <perocho.xela@gmail.com>",
     "type": "module",
-    "main": "server.js",
+    "main": "dist/src/server/server.js",
     "scripts": {
-        "start": "node --trace-warnings --watch src/server.js",
-        "start:dev": "node --trace-warnings --watch src/server.js"
+        "build": "tsc",
+        "start": "node --trace-warnings --watch dist/server/src/server.js",
+        "start:dev": "node --trace-warnings --watch dist/server.js"
     },
     "dependencies": {
         "bcrypt": "^5.1.1",

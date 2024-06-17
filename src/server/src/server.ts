@@ -1,13 +1,13 @@
-import { Server } from 'http';
-import app from './app';
-import connectDatabase from 'config/database';
+import { AddressInfo } from 'net';
+import app from './app.js';
+import connectDatabase from './config/database.config.js';
 
 await connectDatabase();
-const server: Server = app.listen(app.get('port'), () => {
+const server = app.listen(app.get('port'), () => {
     try {
         if (!server.address) throw new Error('Cannot retrieve Server Address');
-        const address = server.address();
-        console.log(`Listening on port: ${address}`);
+        const address: AddressInfo = server.address() as AddressInfo;
+        console.log(`Listening on port: ${address.port}`);
     } catch (error) {
         console.log(error);
     }
