@@ -11,9 +11,12 @@ const login: RequestHandler<
     const { email, password } = req.body;
     const user = await UserModel.findOne({ email });
     const secret = process.env['JWT_SECRET'];
+    console.log(req.body);
     if (!secret)
         throw new Error('Internal Server Error: JWT Secret is not defined');
     if (!user) throw new Error('User Not Found');
+
+    console.log(password, user.password);
 
     const validPassword = bcrypt.compareSync(password, user.password);
     if (!validPassword) throw new Error('Invalid Credentials');

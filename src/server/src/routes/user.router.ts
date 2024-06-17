@@ -7,8 +7,16 @@ const router = express.Router();
 const controls = userControls();
 
 router.get('/user/:username', catchError(controls.read));
-router.delete('/user/delete/:id', verifyUser, catchError(controls.delete));
-router.post('/user/update/:id', verifyUser, catchError(controls.update));
+router.delete(
+    '/user/delete/:id',
+    catchError(verifyUser),
+    catchError(controls.delete)
+);
+router.post(
+    '/user/update/:id',
+    catchError(verifyUser),
+    catchError(controls.update)
+);
 // router.put(
 //     '/user/update/:id/about',
 //     verifyUser,

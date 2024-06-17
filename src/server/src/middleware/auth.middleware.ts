@@ -1,14 +1,18 @@
 import { RequestHandler } from 'express';
+import UserModel from '../models/user.model.js';
 import jwt from 'jsonwebtoken';
 
 const verifyUser: RequestHandler<
     { id: string },
     {},
     { id: string; user?: string }
-> = (req, _res, next) => {
+> = async (req, _res, next) => {
     const id = req.body.id;
     const token = req.cookies['access_token'];
     const secret = process.env['JWT_SECRET'];
+    const user = await UserModel.findById(id);
+
+    if (!user) throw new Error('User Not Found');
 
     if (id !== req.params['id'] || !token)
         throw new Error('Unauthorized Request');
@@ -18,7 +22,7 @@ const verifyUser: RequestHandler<
 
     jwt.verify(token, secret, (user: any) => {
         req.body.user = user;
-        next();
+        return next();
     });
 };
 
