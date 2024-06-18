@@ -1,16 +1,15 @@
-import storePersist, { localStorageHealthCheck } from './storePersist';
-
 import { configureStore } from '@reduxjs/toolkit';
-import { rootReducer } from './rootReducers';
-
-localStorageHealthCheck();
-
-const preloadedState = { auth: storePersist.get('auth') }; // Type: RootState
+import { persistStore } from 'redux-persist';
+import rootReducer from './reducer';
 
 export const store = configureStore({
     reducer: rootReducer,
-    preloadedState,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: false,
+        }),
 });
 
+export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
