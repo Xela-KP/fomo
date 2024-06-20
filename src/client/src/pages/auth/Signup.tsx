@@ -8,7 +8,7 @@ import type {
 } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { OAuthButton } from '@components/OAuthButton';
+import { OAuthButton } from '@src/components/auth/OAuthButton';
 import { useState } from 'react';
 
 export const Signup = () => {

@@ -2,7 +2,7 @@ import { Suspense, lazy } from 'react';
 import { persistor, store } from '@redux/store';
 
 import { BrowserRouter } from 'react-router-dom';
-import { Loading } from '@pages/Loading';
+import { Loading } from '@src/pages/common/Loading';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 

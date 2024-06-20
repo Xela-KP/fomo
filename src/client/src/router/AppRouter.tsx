@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 
 import { Home } from '@src/pages/app/Home';
-import { NotFound } from '@src/pages/NotFound';
+import { NotFound } from '@src/pages/common/NotFound';
 
 export const AppRouter = () => (
     <Routes>

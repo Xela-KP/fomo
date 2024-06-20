@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 import type { LoginForm } from '@shared/forms/auth';
-import { OAuthButton } from '@src/components/OAuthButton';
+import { OAuthButton } from '@src/components/auth/OAuthButton';
 import { login } from '@src/redux/auth/thunks';
 import { useState, type ChangeEventHandler } from 'react';
 
