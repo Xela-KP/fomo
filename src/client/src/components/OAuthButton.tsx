@@ -11,7 +11,6 @@ export const OAuthButton = () => {
 
     return (
         <Button
-            type="button"
             gradientDuoTone="tealToLime"
             outline
             onClick={() => dispatch(googleLogin())}

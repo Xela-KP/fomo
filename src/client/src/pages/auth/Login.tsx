@@ -61,7 +61,6 @@ export const Login = () => {
                     </div>
 
                     <Button
-                        type="submit"
                         gradientDuoTone="greenToBlue"
                         onClick={() => dispatch(login(loginForm))}
                     >
