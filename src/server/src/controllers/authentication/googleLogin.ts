@@ -1,18 +1,17 @@
+import {
+    GoogleLoginForm,
+    SignupForm,
+} from '../../../../shared/forms/auth/index.js';
+
 import { RequestHandler } from 'express';
 import UserModel from '../../models/user.model.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-const googleLogin: RequestHandler<
-    {},
-    {},
-    {
-        googleUsername: string;
-        email: string;
-        password?: string;
-        pfp: string;
-    }
-> = async (req, res) => {
+const googleLogin: RequestHandler<{}, {}, GoogleLoginForm> = async (
+    req,
+    res
+) => {
     const { googleUsername, email, pfp } = req.body;
     const user = await UserModel.findOne({ email });
     const port = process.env['PORT']?.toString() as string;
@@ -27,7 +26,7 @@ const googleLogin: RequestHandler<
             }`,
             10
         );
-        const body = { username, email, password, pfp };
+        const body: SignupForm = { username, email, password, pfp };
         const response = await fetch(`http://localhost:${port}/api/signup`, {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
@@ -38,13 +37,18 @@ const googleLogin: RequestHandler<
                 'Internal Server Error: Failed to create account with google'
             );
     }
+
     const validUser = await UserModel.findOne({ email }).lean();
     if (!validUser) throw new Error('Internal Server Error: failed to log in');
     const token = jwt.sign({ id: validUser._id }, secret);
     return res
-        .status(201)
+        .status(200)
         .cookie('access_token', token, { httpOnly: true })
-        .send({ success: true, message: 'successfully logged in via google' });
+        .send({
+            success: true,
+            message: 'successfully logged in via google',
+            user: { ...validUser, password: undefined },
+        });
 };
 
 export default googleLogin;

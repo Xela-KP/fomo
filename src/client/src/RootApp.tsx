@@ -8,13 +8,13 @@ import { Provider } from 'react-redux';
 
 const App = lazy(() => import('./App'));
 export const RootApp = () => (
-    <PersistGate persistor={persistor}>
-        <Provider store={store}>
+    <Provider store={store}>
+        <PersistGate persistor={persistor}>
             <BrowserRouter>
                 <Suspense fallback={<Loading />}>
                     <App />
                 </Suspense>
             </BrowserRouter>
-        </Provider>
-    </PersistGate>
+        </PersistGate>
+    </Provider>
 );

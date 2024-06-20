@@ -17,20 +17,5 @@ router.post(
     catchError(verifyUser),
     catchError(controls.update)
 );
-// router.put(
-//     '/user/update/:id/about',
-//     verifyUser,
-//     catchError(controls.updateAbout)
-// );
-// router.patch(
-//     '/user/update/:id/links',
-//     verifyUser,
-//     catchError(controls.updateLinks)
-// );
-// router.put(
-//     '/user/update/:id/pfp',
-//     verifyUser,
-//     catchError(controls.updateProfilePicture)
-// );
 
 export default router;
