@@ -32,7 +32,13 @@ export const Login = () => {
                     <Label className="text-xl">Log In</Label>
                 </span>
 
-                <form className="flex flex-col gap-4" onSubmit={() => {}}>
+                <form
+                    className="flex flex-col gap-4"
+                    onSubmit={(e) => {
+                        e.preventDefault(); // Prevent page from refreshing (default behaviour of form submit)
+                        dispatch(login(loginForm)); // Preventing refresh allows dispatch to complete.
+                    }}
+                >
                     <div>
                         <div className="mb-2 block">
                             <Label htmlFor="email" value="Email" />
@@ -60,10 +66,7 @@ export const Login = () => {
                         />
                     </div>
 
-                    <Button
-                        gradientDuoTone="greenToBlue"
-                        onClick={() => dispatch(login(loginForm))}
-                    >
+                    <Button type="submit" gradientDuoTone="greenToBlue">
                         {isLoading ? <Spinner></Spinner> : <span>Log In</span>}
                     </Button>
 
